@@ -1,7 +1,10 @@
 extensions [csv]
+globals [data variable variable1 variable2]
+
+
 to Setup
-  ;file-close-all % Close any files open from last run
-  ;file-open "C:\Users\gavin\OneDrive\Documents\GitHub\AlgaeBiofuels\data\processed\actually_processed_new_KA32.csv"
+  file-close-all ; Close any files open from last run
+  file-open "CSV files/actually_processed_new.csv"
   ca
   system-dynamics-setup
   set Grow-Biomass 0
@@ -9,15 +12,21 @@ to Setup
   set Grow-Lipid 1
 end
 to Start
-  if Biomass-Growth [set Grow-Biomass 1]
-  if Biomass-Growth = false [set Grow-Biomass 0]
-  if Biomass-Growth [set Grow-Lipid 0]
-  if Biomass-Growth = false [set Grow-Lipid 1]
+  if file-at-end? [ stop ]
+  set data csv:from-row file-read-line
+  tick
+  set variable item 1 data
+  set variable1 item 2 data
+  set variable2 item 3 data
+  ;if Biomass-Growth [set Grow-Biomass 1]
+  ;if Biomass-Growth = false [set Grow-Biomass 0]
+  ;if Biomass-Growth [set Grow-Lipid 0]
+  ;if Biomass-Growth = false [set Grow-Lipid 1]
   system-dynamics-go
-  set-current-plot "Nutrient_levels"
+  set-current-plot "plot 1"
   system-dynamics-do-plot
-  set-current-plot "Biomass/Lipid Levels"
-  system-dynamics-do-plot
+  ;set-current-plot "Biomass/Lipid Levels"
+  ;system-dynamics-do-plot
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -90,7 +99,7 @@ user-PPM-Phosphorous
 user-PPM-Phosphorous
 0
 100
-21.0
+22.0
 1
 1
 PPM
@@ -165,9 +174,9 @@ Modeling for Lipid-Production\nor Biomass Growth
 1
 
 PLOT
-552
+485
 77
-1001
+934
 483
 Nutrient_levels
 Time
@@ -182,6 +191,7 @@ true
 PENS
 "PPM-Phosphorous" 1.0 0 -2674135 true "" ""
 "PPM-Nitrogen" 1.0 0 -10141563 true "" " "
+"variable" 1.0 0 -7500403 true "" "plot variable"
 
 PLOT
 1029
@@ -201,6 +211,26 @@ true
 PENS
 "Biomass" 1.0 0 -14439633 true "" ""
 "Lipid" 1.0 0 -10402772 true "" ""
+
+PLOT
+138
+325
+648
+625
+plot 1
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Protein" 1.0 0 -16777216 true "" "plot variable"
+"Lipid" 1.0 0 -7500403 true "" "plot variable1"
+"Carbohydrate" 1.0 0 -2674135 true "" "plot variable2"
 
 @#$#@#$#@
 ## WHAT IS IT?
