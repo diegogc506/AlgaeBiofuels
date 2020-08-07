@@ -11,7 +11,31 @@ to Setup
   set Grow-Lipid 1
 end
 to Start
-  set Temp random-exponential 20
+  ;Temp for season: Fall
+  if (Ticks < 91) and (Ticks >= 0) [set Temp random-normal 18 4]
+  ;Temp for season: Winter
+  if (Ticks < 182) and (Ticks >= 91) [set Temp random-normal 11 3]
+  ;Temp for season: Spring
+  if (Ticks < 273) and (Ticks >= 182) [set Temp random-normal 17 3]
+  ;Temp for season: Summer
+  if (Ticks < 364) and (Ticks >= 273) [set Temp random-normal 21 4]
+  ;Temp for season: Fall
+  if (Ticks < 455) and (Ticks >= 364) [set Temp random-normal 18 4]
+  ;Temp for season: Winter
+  if (Ticks < 546) and (Ticks >= 455) [set Temp random-normal 11 3]
+  ;Temp for season: Spring
+  if (Ticks < 637) and (Ticks >= 546) [set Temp random-normal 17 3]
+  ;Temp for season: Summer
+  if (Ticks < 728) and (Ticks >= 637) [set Temp random-normal 21 4]
+
+
+
+
+  ;set Temp random-normal 20 7.5
+  set Salinity random-normal 29 2
+  set Sal Salinity
+  set Temperature Temp
+  ;print Salinity
   ;print Temp
   if mg/L-Nitrogen = 0 [stop]
   if Biomass > ((Max_biomass)*(Harvest_Point)) [set Lipid ((1)*(Max_lipid)/(4))]
@@ -21,6 +45,8 @@ to Start
   ;if Biomass-Growth [set Grow-Lipid 0]
   ;if Biomass-Growth = false [set Grow-Lipid 1]
   system-dynamics-go
+  set-current-plot "Enviroment"
+  system-dynamics-do-plot
   set-current-plot "Nutrient_levels"
   system-dynamics-do-plot
   ;set ratioLB (((Biomass)*(Lipid))/(100))
@@ -169,12 +195,14 @@ true
 "" ""
 PENS
 "mg/L-Nitrogen" 1.0 0 -10141563 true "" ""
+"Sal" 1.0 0 -10899396 true "" ""
+"Temperature" 1.0 0 -2674135 true "" ""
 
 PLOT
-912
-205
-1457
-714
+942
+454
+1487
+963
 Biomass Levels
 Time
 Unit
@@ -197,7 +225,7 @@ Temp
 Temp
 0
 100
-45.20558591258027
+17.78248015580736
 1
 1
 C
@@ -212,17 +240,17 @@ Salinity
 Salinity
 0
 100
-29.0
+27.244629717444987
 1
 1
 g/L
 HORIZONTAL
 
 PLOT
-462
-29
-860
-369
+454
+35
+852
+375
 Lipid Levels
 NIL
 NIL
@@ -250,6 +278,25 @@ Harvest_Point
 1
 NIL
 HORIZONTAL
+
+PLOT
+905
+407
+1858
+920
+Enviroment
+Time
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Sal" 1.0 0 -7500403 true "" ""
+"Temperature" 1.0 0 -2674135 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -597,7 +644,7 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 1.0
-    org.nlogo.sdm.gui.AggregateDrawing 41
+    org.nlogo.sdm.gui.AggregateDrawing 43
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 255 437 50 50
             org.nlogo.sdm.gui.WrappedConverter "user-mg/L-Nitrogen" "mg/L-Nitrogen-init"
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 19 13 50 50
@@ -691,6 +738,10 @@ NetLogo 6.1.1
             org.nlogo.sdm.gui.ChopRateConnector REF 58
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 705 203 50 50
             org.nlogo.sdm.gui.WrappedConverter "(25000)" "Max_biomass"
+        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 172 124 60 40
+            org.nlogo.sdm.gui.WrappedStock "Sal" "Salinity" 1
+        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 150 236 60 40
+            org.nlogo.sdm.gui.WrappedStock "Temperature" "Temp" 1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
