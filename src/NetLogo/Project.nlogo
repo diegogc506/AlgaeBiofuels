@@ -1,4 +1,4 @@
-globals []
+globals [has_Starved starving Starving_start_time Starving_end_time]
 
 
 to Setup
@@ -9,31 +9,49 @@ to Setup
 end
 to Start
   ;Temp for season: Fall
-  if (Ticks < 91) and (Ticks >= 0) [set Temp random-normal 18 4]
+  if (Ticks < 91) and (Ticks >= 0) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
   ;Temp for season: Winter
-  if (Ticks < 182) and (Ticks >= 91) [set Temp random-normal 11 3]
+  if (Ticks < 182) and (Ticks >= 91) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
   ;Temp for season: Spring
-  if (Ticks < 273) and (Ticks >= 182) [set Temp random-normal 17 3]
+  if (Ticks < 273) and (Ticks >= 182) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
   ;Temp for season: Summer
-  if (Ticks < 364) and (Ticks >= 273) [set Temp random-normal 21 4]
+  if (Ticks < 364) and (Ticks >= 273) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
   ;Temp for season: Fall
-  if (Ticks < 455) and (Ticks >= 364) [set Temp random-normal 18 4]
+  if (Ticks < 455) and (Ticks >= 364) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
   ;Temp for season: Winter
-  if (Ticks < 546) and (Ticks >= 455) [set Temp random-normal 11 3]
+  if (Ticks < 546) and (Ticks >= 455) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
   ;Temp for season: Spring
-  if (Ticks < 637) and (Ticks >= 546) [set Temp random-normal 17 3]
+  if (Ticks < 637) and (Ticks >= 546) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
   ;Temp for season: Summer
-  if (Ticks < 728) and (Ticks >= 637) [set Temp random-normal 21 4]
-  ;set Temp random-normal 20 7.5
+  if (Ticks < 728) and (Ticks >= 637) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+  if ((Starvation_Start_Trigger = "Biomass") and (Biomass >= Starvation_start)) and (has_Starved = False) [
+    set has_Starved True
+    set starving True
+    set Starving_start_time Ticks
+    set Starving_end_time ((Starving_start_time)+(Starvation_length))
+  ]
+  if ((Starvation_Start_Trigger = "Remaining Nitrogen") and (mg/L-Nitrogen <= Starvation_start)) and (has_Starved = False) [
+    set has_Starved True
+    set starving True
+    set Starving_start_time Ticks
+    set Starving_end_time ((Starving_start_time)+(Starvation_length))
+  ]
+  if ((Starvation_Start_Trigger = "Time") and (Ticks = Starvation_start)) and (has_Starved = False) [
+    set has_Starved True
+    set starving True
+    set Starving_start_time Ticks
+    set Starving_end_time ((Starving_start_time)+(Starvation_length))
+  ]
+  if starving [
+
+
+
+  ]
   set PAR_Light random-normal 412.73276190717496 150.66482884736547
-  set Salinity random-normal 29 2
+  set Salinity random-normal Mean_Sal Sal_STDEV
   set Sal Salinity
   set Temperature Temp
-  ;print ((lipid)/(100))
   set lipid ((((lipid_holder)*(Biomass))/(5))/(Biomass))
-  print lipid
-  ;print Salinity
-  ;print Temp
   if mg/L-Nitrogen = 0 [stop]
   ;if Biomass > ((Max_biomass)*(Harvest_Point)) [set Lipid ((1)*(Max_lipid)/(4))]
   if Biomass > ((Max_biomass)*(Harvest_Point)) [set Biomass ((1)*(Max_biomass)/(4))]
@@ -42,7 +60,6 @@ to Start
   system-dynamics-do-plot
   set-current-plot "Nutrient_levels"
   system-dynamics-do-plot
-  ;set ratioLB (((Biomass)*(Lipid))/(100))
   set-current-plot "Biomass Levels"
   system-dynamics-do-plot
   set-current-plot "Lipid Levels"
@@ -50,13 +67,13 @@ to Start
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1873
-868
-1906
-902
+1432
+335
+1455
+359
 -1
 -1
-25.0
+12.0
 1
 10
 1
@@ -77,10 +94,10 @@ ticks
 30.0
 
 BUTTON
-192
-524
-256
-557
+1215
+608
+1279
+641
 NIL
 Setup
 NIL
@@ -94,10 +111,10 @@ NIL
 1
 
 BUTTON
-264
-522
-340
-558
+1287
+605
+1363
+641
 NIL
 Start
 T
@@ -111,50 +128,35 @@ NIL
 1
 
 SLIDER
-15
-188
-226
-221
-user-mg/L-Phosphorous
-user-mg/L-Phosphorous
-0
-1000
-561.0
-1
-1
-mg/L
-HORIZONTAL
-
-SLIDER
-15
-442
-398
-475
+1048
+659
+1342
+693
 user-mg/L-Nitrogen
 user-mg/L-Nitrogen
 0
 1000
-733.0
+147.0
 1
 1
 mg/L
 HORIZONTAL
 
 TEXTBOX
-44
-161
-194
-179
+1049
+606
+1199
+639
 Initial Values
-11
+35
 0.0
 1
 
 PLOT
-418
-432
-867
-838
+0
+636
+449
+1042
 Nutrient_levels
 Time
 mg/L
@@ -170,10 +172,10 @@ PENS
 "mg/L-Nitrogen" 1.0 0 -10141563 true "" ""
 
 PLOT
-913
-564
-1458
-1073
+466
+582
+1011
+1091
 Biomass Levels
 Time
 Unit
@@ -188,40 +190,40 @@ PENS
 "Biomass" 1.0 0 -7500403 true "" ""
 
 SLIDER
-56
-401
-228
-434
+192
+150
+364
+183
 Temp
 Temp
 0
 100
-18.385508016607908
+10.174487297049495
 1
 1
 C
 HORIZONTAL
 
 SLIDER
-55
-355
-227
-388
+190
+105
+362
+138
 Salinity
 Salinity
 0
 100
-29.974485132500973
+31.864892953319565
 1
 1
 g/L
 HORIZONTAL
 
 PLOT
-454
-35
-852
-375
+43
+202
+441
+542
 Lipid Levels
 TIme
 Percentage (%)
@@ -236,10 +238,10 @@ PENS
 "Lipid" 1.0 0 -13840069 true "" ""
 
 SLIDER
-23
-488
-196
-521
+1042
+717
+1215
+750
 Harvest_Point
 Harvest_Point
 0
@@ -251,10 +253,10 @@ NIL
 HORIZONTAL
 
 PLOT
-883
-30
-1836
-543
+420
+53
+1373
+566
 Enviroment
 Time
 NIL
@@ -270,10 +272,10 @@ PENS
 "Temperature" 1.0 0 -2674135 true "" ""
 
 SLIDER
-99
-300
-272
-334
+190
+58
+363
+92
 PAR_Light_in
 PAR_Light_in
 100
@@ -283,6 +285,208 @@ PAR_Light_in
 1
 NIL
 HORIZONTAL
+
+INPUTBOX
+1038
+837
+1152
+901
+Fall_mean_temp
+18.0
+1
+0
+Number
+
+INPUTBOX
+1029
+898
+1138
+967
+Winter_mean_temp
+11.0
+1
+0
+Number
+
+INPUTBOX
+1025
+966
+1141
+1038
+Spring_mean_temp
+17.0
+1
+0
+Number
+
+INPUTBOX
+1025
+1036
+1151
+1106
+Summer_mean_temp
+21.0
+1
+0
+Number
+
+INPUTBOX
+1153
+834
+1250
+894
+Fall_temp_STDEV
+4.0
+1
+0
+Number
+
+INPUTBOX
+1144
+903
+1263
+963
+Winter_temp_STDEV
+3.0
+1
+0
+Number
+
+INPUTBOX
+1148
+964
+1275
+1024
+Spring_temp_STDEV
+3.0
+1
+0
+Number
+
+INPUTBOX
+1154
+1040
+1279
+1100
+Summer_temp_STDEV
+4.0
+1
+0
+Number
+
+INPUTBOX
+1052
+1118
+1116
+1178
+Mean_Sal
+29.0
+1
+0
+Number
+
+INPUTBOX
+1158
+1115
+1228
+1175
+Sal_STDEV
+2.0
+1
+0
+Number
+
+CHOOSER
+1039
+782
+1221
+828
+Starve_for_Lipid_Production
+Starve_for_Lipid_Production
+true false
+1
+
+TEXTBOX
+1258
+848
+1343
+886
+Default Fall Values: 18,4
+15
+0.0
+1
+
+TEXTBOX
+1272
+915
+1439
+953
+Default Winter Values: 11,3
+15
+0.0
+1
+
+TEXTBOX
+1289
+976
+1456
+1014
+Deault Spring Values:\n17,3
+15
+0.0
+1
+
+TEXTBOX
+1294
+1045
+1461
+1083
+Default Summer Values:\n21,4
+15
+0.0
+1
+
+TEXTBOX
+1248
+1127
+1415
+1165
+Default Salinity Values:\n29,2
+15
+0.0
+1
+
+INPUTBOX
+1227
+715
+1316
+775
+Starvation_start
+0.0
+1
+0
+Number
+
+INPUTBOX
+1227
+772
+1330
+832
+Starvation_Length
+0.0
+1
+0
+Number
+
+CHOOSER
+1330
+724
+1494
+770
+Starvation_Start_Trigger
+Starvation_Start_Trigger
+"Biomass" "Remaining Nitrogen" "Time"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
