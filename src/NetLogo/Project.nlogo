@@ -6,8 +6,13 @@ to Setup
   file-open "CSV files/actually_processed_new.csv"
   ca
   system-dynamics-setup
+  set has_Starved False
+  set starving False
+  set Starving_start_time 0
+  set Starving_end_time 0
 end
 to Start
+  if mg/L-Nitrogen = 0 [stop]
   ;Temp for season: Fall
   if (Ticks < 91) and (Ticks >= 0) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
   ;Temp for season: Winter
@@ -24,6 +29,11 @@ to Start
   if (Ticks < 637) and (Ticks >= 546) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
   ;Temp for season: Summer
   if (Ticks < 728) and (Ticks >= 637) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+  set PAR_Light random-normal 412.73276190717496 150.66482884736547
+  set Salinity random-normal Mean_Sal Sal_STDEV
+  set Sal Salinity
+  set Temperature Temp
+  set lipid ((((lipid_holder)*(Biomass))/(5))/(Biomass))
   if ((Starvation_Start_Trigger = "Biomass") and (Biomass >= Starvation_start)) and (has_Starved = False) [
     set has_Starved True
     set starving True
@@ -43,18 +53,15 @@ to Start
     set Starving_end_time ((Starving_start_time)+(Starvation_length))
   ]
   if starving [
-
-
-
+    set mg/L-Nitrogen 0
+    set Biomass_Growth 0
+    set Lipid_Growth 0
+    set Lipid_Starve_Growth 0
   ]
-  set PAR_Light random-normal 412.73276190717496 150.66482884736547
-  set Salinity random-normal Mean_Sal Sal_STDEV
-  set Sal Salinity
-  set Temperature Temp
-  set lipid ((((lipid_holder)*(Biomass))/(5))/(Biomass))
-  if mg/L-Nitrogen = 0 [stop]
+  set Biomass_Growth Growth_biomass
+  set Lipid_Growth Growth_lipid
   ;if Biomass > ((Max_biomass)*(Harvest_Point)) [set Lipid ((1)*(Max_lipid)/(4))]
-  if Biomass > ((Max_biomass)*(Harvest_Point)) [set Biomass ((1)*(Max_biomass)/(4))]
+  if (Biomass > ((Max_biomass)*(Harvest_Point))) and starving = False [set Biomass ((1)*(Max_biomass)/(4))]
   system-dynamics-go
   set-current-plot "Enviroment"
   system-dynamics-do-plot
@@ -834,7 +841,7 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 1.0
-    org.nlogo.sdm.gui.AggregateDrawing 43
+    org.nlogo.sdm.gui.AggregateDrawing 48
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 255 437 50 50
             org.nlogo.sdm.gui.WrappedConverter "user-mg/L-Nitrogen" "mg/L-Nitrogen-init"
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 928 548 60 40
@@ -874,7 +881,7 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 349 663 50 50
             org.nlogo.sdm.gui.WrappedConverter "(150)" "Carrying_cap_Lip"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 897 843 30 30
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 1282 156 50 50
+        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 1371 201 50 50
             org.nlogo.sdm.gui.WrappedConverter "((0.75)*((23.0475890503587)+((Water_Salinity)*(-0.224999652))+((Water_Temp)*(-0.0918736809))+((mg/L-Nitrogen)*(-0.0251703051))))" "Growth_lipid"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1304 78 30 30
         org.nlogo.sdm.gui.RateConnection 3 1305 93 1237 93 1142 93 NULL NULL 0 0 0
@@ -882,55 +889,68 @@ NetLogo 6.1.1
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.nlogo.sdm.gui.WrappedRate "Growth_lipid" "Lipid_in"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 10 0
-        org.nlogo.sdm.gui.BindingConnection 2 1294 168 1237 93 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 40
-            org.nlogo.sdm.gui.ChopRateConnector REF 43
         org.nlogo.sdm.gui.RateConnection 3 1100 126 1100 213 994 213 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.jhotdraw.figures.ChopEllipseConnector
                 org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 964 198 30 30
             org.nlogo.sdm.gui.WrappedRate "((Growth_lipid)*(Lipid_holder)/((Max_lipid)))" "Lipid_eq" REF 10
-                org.nlogo.sdm.gui.WrappedReservoir  0   REF 54
-        org.nlogo.sdm.gui.BindingConnection 2 1283 179 1100 213 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 40
-            org.nlogo.sdm.gui.ChopRateConnector REF 51
+                org.nlogo.sdm.gui.WrappedReservoir  0   REF 51
         org.nlogo.sdm.gui.BindingConnection 2 1077 126 1100 213 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 9
-            org.nlogo.sdm.gui.ChopRateConnector REF 51
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 687 111 50 50
+            org.nlogo.sdm.gui.ChopRateConnector REF 48
+        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 820 61 50 50
             org.nlogo.sdm.gui.WrappedConverter "((1412.190284490395)+((Water_Salinity)*(-14.99713305))+((Water_Temp)*(-5.9535476325))+((mg/L-Nitrogen)*(-0.76706874))+((PAR_Light)*(-0.1451240891421969)))" "Growth_biomass"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1091 333 30 30
         org.nlogo.sdm.gui.RateConnection 3 1092 348 919 348 756 348 NULL NULL 0 0 0
-            org.jhotdraw.figures.ChopEllipseConnector REF 65
+            org.jhotdraw.figures.ChopEllipseConnector REF 59
             org.jhotdraw.standard.ChopBoxConnector REF 11
             org.nlogo.sdm.gui.WrappedRate "Growth_biomass" "Biomass_in"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 12 0
-        org.nlogo.sdm.gui.BindingConnection 2 724 148 919 348 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 63
-            org.nlogo.sdm.gui.ChopRateConnector REF 66
-        org.nlogo.sdm.gui.BindingConnection 2 698 147 501 349 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 63
-            org.nlogo.sdm.gui.ChopRateConnector REF 16
         org.nlogo.sdm.gui.BindingConnection 2 672 349 501 349 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 11
             org.nlogo.sdm.gui.ChopRateConnector REF 16
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 1268 326 50 50
             org.nlogo.sdm.gui.WrappedConverter "(200)" "Max_lipid"
         org.nlogo.sdm.gui.BindingConnection 2 1278 340 1100 213 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 80
-            org.nlogo.sdm.gui.ChopRateConnector REF 51
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 705 203 50 50
+            org.jhotdraw.contrib.ChopDiamondConnector REF 68
+            org.nlogo.sdm.gui.ChopRateConnector REF 48
+        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 806 193 50 50
             org.nlogo.sdm.gui.WrappedConverter "(25000)" "Max_biomass"
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 172 124 60 40
             org.nlogo.sdm.gui.WrappedStock "Sal" "Salinity" 1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 150 236 60 40
             org.nlogo.sdm.gui.WrappedStock "Temperature" "Temp" 1
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1157 418 60 40
-            org.nlogo.sdm.gui.WrappedStock "lipid_growth" "(0)" 1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1123 664 60 40
             org.nlogo.sdm.gui.WrappedStock "Lipid" "(0)" 1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 427 128 60 40
             org.nlogo.sdm.gui.WrappedStock "PAR_Light" "(PAR_Light_in)" 0
+        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 694 233 60 40
+            org.nlogo.sdm.gui.WrappedStock "Biomass_Growth" "(0)" 1
+        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1212 208 60 40
+            org.nlogo.sdm.gui.WrappedStock "Lipid_Growth" "(0)" 1
+        org.nlogo.sdm.gui.BindingConnection 2 682 268 501 349 NULL NULL 0 0 0
+            org.jhotdraw.standard.ChopBoxConnector REF 83
+            org.nlogo.sdm.gui.ChopRateConnector REF 16
+        org.nlogo.sdm.gui.BindingConnection 2 766 272 919 348 NULL NULL 0 0 0
+            org.jhotdraw.standard.ChopBoxConnector REF 83
+            org.nlogo.sdm.gui.ChopRateConnector REF 60
+        org.nlogo.sdm.gui.BindingConnection 2 1237 196 1237 93 NULL NULL 0 0 0
+            org.jhotdraw.standard.ChopBoxConnector REF 85
+            org.nlogo.sdm.gui.ChopRateConnector REF 43
+        org.nlogo.sdm.gui.BindingConnection 2 1200 215 1100 213 NULL NULL 0 0 0
+            org.jhotdraw.standard.ChopBoxConnector REF 85
+            org.nlogo.sdm.gui.ChopRateConnector REF 48
+        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 941 124 60 40
+            org.nlogo.sdm.gui.WrappedStock "Lipid_Starve_Growth" "(0)" 1
+        org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 962 83 30 30
+        org.nlogo.sdm.gui.RateConnection 3 992 98 1038 96 1058 95 NULL NULL 0 0 0
+            org.jhotdraw.figures.ChopEllipseConnector REF 101
+            org.jhotdraw.standard.ChopBoxConnector REF 9
+            org.nlogo.sdm.gui.WrappedRate "Lipid_Starve_Growth" "Lipid_Starve_Growth_in"
+                org.nlogo.sdm.gui.WrappedReservoir  REF 10 0
+        org.nlogo.sdm.gui.BindingConnection 2 1007 112 1038 96 NULL NULL 0 0 0
+            org.jhotdraw.standard.ChopBoxConnector REF 99
+            org.nlogo.sdm.gui.ChopRateConnector REF 102
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
