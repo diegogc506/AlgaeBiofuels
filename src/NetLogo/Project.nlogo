@@ -145,12 +145,6 @@ to Start
   system-dynamics-do-plot
   set lipid_percent lput ((100)*(Lipid)/(Biomass)) lipid_percent
 end
-to output
-  file-open "Model_Output.txt"
-  file-write lipid_percent
-  file-close
-
-end
 @#$#@#$#@
 GRAPHICS-WINDOW
 1432
@@ -284,7 +278,7 @@ Temp
 Temp
 0
 100
-11.281738020317743
+11.459027785075884
 1
 1
 C
@@ -299,7 +293,7 @@ Salinity
 Salinity
 0
 100
-29.34746398048388
+28.097460382882627
 1
 1
 g/L
@@ -564,23 +558,6 @@ Starvation_Start_Trigger
 "Biomass" "Remaining Nitrogen" "Time"
 2
 
-BUTTON
-1348
-606
-1495
-658
-Output created Data
-output
-NIL
-1
-T
-OBSERVER
-NIL
-NIL
-NIL
-NIL
-1
-
 SLIDER
 1315
 757
@@ -603,7 +580,7 @@ SWITCH
 725
 Starve_for_Lipid_Production
 Starve_for_Lipid_Production
-1
+0
 1
 -1000
 
@@ -625,31 +602,59 @@ Both options in the model uses a combination of custom code and NetLogo’s Syst
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+ Two main buttons are used to control the model:
+
+SETUP: Run this once you have set all the settings as described below, it resets all backend code and clears outputs. **BEFORE YOU RUN THIS, MAKE SURE TO SAVE ANY GRAPHS YOU WANT.**
+
+START: Use this to run the model simulation. **MAKE SURE TO RUN SETUP FIRST**, or the model will not run at all, as non-first attempts may function improperly on first run.
+
+There are many inputs you can choose to manipulate:
+
+ 	- Starve for Lipid Production is the most important one.
+
+If **OFF** set the following values as you see fit, or leave to their defaults:
+	- Average Temperature and Standard Deviation of Temperature for each season, listed as [Season]_mean_temp and [Season]_temp_STDEV, respectively, used to generate the temperature of the pond throughout the cycle.
+	- Mean_Sal, and Sal_STDEV, the mean salinity and standard deviation of salinity for the pond, to generate the salinity of the pond throughout the cycle.
+	user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
+	- Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 in 100%.
+
+If Starve for Lipid Production is **ON**, set the following values:
+	- Ressuplement Nitrogen Amount, the among of nitrogen in mg/L added after the starvation period is over
+	- Starvation Start trigger, which allows you to choose how the start of starvation is triggered. **OPTIONS**: Time, Biomass, Remaining Nitrogen
+		- For Starvation Start, if you choose Time as the trigger, set the number of Ticks/Hours after cultivation starts for the starvation period to start.
+		- If you choose Biomass as your trigger, set starvation start to the amount of biomass in mg that you want there to be before starvation starts.
+		- If you choose Remaining Nitrogen, it is a bit more complicated; the number you choose for Starvation start has to be below user-mg/L-Nitrogen, and is the amount of nitrogen you want left in the model before the algae is washed and starved.
+	- Starvation Length is the amount of Time, Hours/Ticks, that the Starvation Period lasts for
+
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+-Think about if the output make sense, for example, when nitrogen is lower, lipids should be higher. If you do not see that, why?
+-Think about what should have an effect. Do some research, does what you find online match with what you see, why or why not?
+-What causes the pond to crash/stop working?
 
 ## THINGS TO TRY
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+-Try moving sliders to extremes
+-Try setting all values close to each other
+-Try to cause a quick pond crash
 
 ## EXTENDING THE MODEL
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+-There are some extra lines of code, to make a list of values that can be exported at the end of the run with some code, make it to get values out
+-Figure out how to plot other variables, and plot ones that you think might be important
 
 ## NETLOGO FEATURES
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+-The model uses large and stacked IF queries
+-The model relies heavily on stocks and Systems Dynamics
 
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+[Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3)
+
+Lipid Starvation Model: Institute of Systems Biology Data on How Different Nutients Effect Lipid Production
 @#$#@#$#@
 default
 true
