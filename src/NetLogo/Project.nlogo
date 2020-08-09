@@ -20,7 +20,7 @@ to Start
 
 
   if  Starve_for_Lipid_Production [
-
+    set S-curve 0
     if (((Starvation_Start_Trigger = "Biomass") and (Biomass >= Starvation_start)) and (has_Starved = False)) [
       set has_Starved True
       set starving True
@@ -59,7 +59,7 @@ to Start
      set Biomass_Growth 0
      set Biomass_Starve_Growth 0.0027373098101880814
      set Lipid_Growth 0
-     set Lipid_Starve_Growth 219.19277649586314
+     set Lipid_Starve_Growth ((219.19277649586314)*(1))
      ;room for biomass code
      ;room for biomass code
    ]
@@ -286,7 +286,7 @@ Temp
 Temp
 0
 100
-10.44502546741467
+11.281738020317743
 1
 1
 C
@@ -301,7 +301,7 @@ Salinity
 Salinity
 0
 100
-28.495090834899433
+29.34746398048388
 1
 1
 g/L
@@ -550,7 +550,7 @@ INPUTBOX
 1278
 775
 Starvation_start
-50.0
+200.0
 1
 0
 Number
@@ -602,7 +602,7 @@ Ressuplement_Nitrogen_Amount
 Ressuplement_Nitrogen_Amount
 0
 100
-20.0
+50.0
 1
 1
 mg/L
@@ -611,11 +611,18 @@ HORIZONTAL
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+This model explores the growth of algae and the production of lipids for the eventual creation of green crude and/or biofuels based on certain environmental. The default option upon opening is to model for biomass growth, and has an option where you can change it to model lipid production.
 
 ## HOW IT WORKS
 
-(what rules the agents use to create the overall behavior of the model)
+There are two variations in the model:
+
+The first option, as mentioned before, models the accumulation of biomass in a raceway pond with a size 3.5 m by 1.5 m and 35 cm in depth (1025 L nominal volume at 25 cm working depth, with a surface area of 4.2 m<sup>2</sup> including the paddlewheel area), with a variety of factors that can be influenced by the user, with the algal strain KA32 - Nannochloropsis Oceanica – Cellana. 
+
+The second option, also mentioned earlier, models the accumulation of lipids in algae based off of lab data during three phases of algae cultivation, Repletion, Starvation, and Resupplementation, and is less representative of a full scale solution, because the data used to produce this part of the model came from a laboratory testing. The algal strain used is Chlamydomonas reinhardtii CC-1690. 
+
+Both options in the model uses a combination of custom code and NetLogo’s Systems Dynamics Modeler.
+
 
 ## HOW TO USE IT
 
@@ -954,7 +961,7 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 1.0
-    org.nlogo.sdm.gui.AggregateDrawing 75
+    org.nlogo.sdm.gui.AggregateDrawing 77
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 255 437 50 50
             org.nlogo.sdm.gui.WrappedConverter "user-mg/L-Nitrogen" "mg/L-Nitrogen-init"
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 928 548 60 40
@@ -1003,7 +1010,7 @@ NetLogo 6.1.1
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.jhotdraw.figures.ChopEllipseConnector
                 org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1323 283 30 30
-            org.nlogo.sdm.gui.WrappedRate "((Lipid_Growth)*(Lipid_holder)/((Max_lipid)))" "Lipid_eq" REF 10
+            org.nlogo.sdm.gui.WrappedRate "((S-curve)*(Lipid_Growth)*(Lipid_holder)/((Max_lipid)))" "Lipid_eq" REF 10
                 org.nlogo.sdm.gui.WrappedReservoir  0   REF 48
         org.nlogo.sdm.gui.BindingConnection 2 1248 417 1289 363 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 9
@@ -1137,6 +1144,11 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.BindingConnection 2 1053 400 1149 405 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 172
             org.nlogo.sdm.gui.ChopRateConnector REF 175
+        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1154 261 60 40
+            org.nlogo.sdm.gui.WrappedStock "S-curve" "(1)" 1
+        org.nlogo.sdm.gui.BindingConnection 2 1224 313 1289 363 NULL NULL 0 0 0
+            org.jhotdraw.standard.ChopBoxConnector REF 183
+            org.nlogo.sdm.gui.ChopRateConnector REF 45
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
