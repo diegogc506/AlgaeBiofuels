@@ -92,8 +92,6 @@ to Start
     ]
     if (mg/L-Nitrogen = 0) and ((starving) = false) [stop]
     set Nitrogen_Consumption ((Biomass)/(500))
-    set PAR_Light random-normal 412.73276190717496 100.66482884736547
-    set Salinity random-normal Mean_Sal Sal_STDEV
     set Sal Salinity
     set Temperature Temp
   ]
@@ -216,10 +214,10 @@ NIL
 1
 
 SLIDER
-1010
-659
-1304
-692
+1003
+746
+1297
+779
 user-mg/L-Nitrogen
 user-mg/L-Nitrogen
 0
@@ -326,10 +324,10 @@ PENS
 "Lipid_Holder" 1.0 0 -13840069 true "" ""
 
 SLIDER
-1004
-717
-1177
-750
+1136
+789
+1309
+822
 Harvest_Point
 Harvest_Point
 0
@@ -484,16 +482,6 @@ Sal_STDEV
 0
 Number
 
-CHOOSER
-1001
-782
-1183
-827
-Starve_for_Lipid_Production
-Starve_for_Lipid_Production
-true false
-0
-
 TEXTBOX
 1220
 848
@@ -545,10 +533,10 @@ Default Salinity Values:\n29,2
 1
 
 INPUTBOX
-1189
-715
-1278
-775
+1373
+846
+1462
+906
 Starvation_start
 200.0
 1
@@ -556,10 +544,10 @@ Starvation_start
 Number
 
 INPUTBOX
-1189
-772
-1292
-832
+1373
+903
+1476
+963
 Starvation_Length
 100.0
 1
@@ -567,10 +555,10 @@ Starvation_Length
 Number
 
 CHOOSER
-1292
-724
-1456
-769
+1350
+799
+1514
+844
 Starvation_Start_Trigger
 Starvation_Start_Trigger
 "Biomass" "Remaining Nitrogen" "Time"
@@ -579,9 +567,9 @@ Starvation_Start_Trigger
 BUTTON
 1348
 606
-1471
+1495
 658
-Output createcd Data
+Output created Data
 output
 NIL
 1
@@ -594,19 +582,30 @@ NIL
 1
 
 SLIDER
-1300
-784
-1523
-817
+1315
+757
+1538
+790
 Ressuplement_Nitrogen_Amount
 Ressuplement_Nitrogen_Amount
 0
 100
-50.0
+49.0
 1
 1
 mg/L
 HORIZONTAL
+
+SWITCH
+1049
+692
+1231
+725
+Starve_for_Lipid_Production
+Starve_for_Lipid_Production
+1
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
