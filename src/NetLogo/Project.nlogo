@@ -654,7 +654,7 @@ If Starve for Lipid Production is **ON**, set the following values:
 
 [Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3)
 
-Lipid Starvation Model: Institute of Systems Biology Data on How Different Nutients Effect Lipid Production
+Lipid Starvation Model: Institute of Systems Biology Data on How Different Nutrients Effect Lipid Production
 @#$#@#$#@
 default
 true
