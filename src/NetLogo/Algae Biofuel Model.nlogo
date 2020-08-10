@@ -147,10 +147,10 @@ to Start
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-1432
-335
-1465
-369
+0
+17
+33
+51
 -1
 -1
 25.0
@@ -174,10 +174,10 @@ ticks
 30.0
 
 BUTTON
-1177
-608
-1241
-641
+24
+285
+88
+318
 NIL
 Setup
 NIL
@@ -191,10 +191,10 @@ NIL
 1
 
 BUTTON
-1249
-605
-1325
-641
+95
+282
+171
+318
 NIL
 Start
 T
@@ -208,10 +208,10 @@ NIL
 1
 
 SLIDER
-1003
-746
-1297
-779
+12
+389
+187
+423
 user-mg/L-Nitrogen
 user-mg/L-Nitrogen
 0
@@ -223,20 +223,20 @@ mg/L
 HORIZONTAL
 
 TEXTBOX
-1001
-599
-1151
-685
+42
+184
+192
+270
 Input Values
 35
 0.0
 1
 
 PLOT
-0
-636
-449
-1042
+1120
+630
+1611
+1099
 Nutrient_levels
 Time
 mg/L
@@ -252,10 +252,10 @@ PENS
 "mg/L-Nitrogen" 1.0 0 -10141563 true "" ""
 
 PLOT
-467
-744
-986
-1093
+505
+632
+1118
+1101
 Biomass Levels
 Time
 Mass (mg)
@@ -270,10 +270,10 @@ PENS
 "Biomass" 1.0 0 -15575016 true "" ""
 
 SLIDER
-192
-150
-364
-183
+5
+995
+177
+1028
 Temp
 Temp
 0
@@ -285,10 +285,10 @@ C
 HORIZONTAL
 
 SLIDER
-190
-105
-362
-138
+0
+949
+172
+982
 Salinity
 Salinity
 0
@@ -300,10 +300,10 @@ g/L
 HORIZONTAL
 
 PLOT
-43
-202
-441
-542
+1618
+623
+2150
+1095
 Lipid Levels
 Time
 Mass (mg)
@@ -318,10 +318,10 @@ PENS
 "Lipid_Holder" 1.0 0 -13840069 true "" ""
 
 SLIDER
-1136
-789
-1309
-822
+189
+392
+309
+426
 Harvest_Point
 Harvest_Point
 0
@@ -333,10 +333,10 @@ NIL
 HORIZONTAL
 
 PLOT
-420
-53
-1373
-566
+732
+56
+1685
+569
 Enviroment
 Time
 NIL
@@ -352,10 +352,10 @@ PENS
 "Temperature" 1.0 0 -2674135 true "" ""
 
 SLIDER
-190
-58
-363
-91
+0
+903
+173
+936
 PAR_Light_in
 PAR_Light_in
 100
@@ -367,10 +367,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-1000
-837
-1114
-901
+12
+436
+126
+500
 Fall_mean_temp
 18.0
 1
@@ -378,10 +378,10 @@ Fall_mean_temp
 Number
 
 INPUTBOX
-991
-898
-1100
-967
+15
+502
+124
+571
 Winter_mean_temp
 11.0
 1
@@ -389,10 +389,10 @@ Winter_mean_temp
 Number
 
 INPUTBOX
-987
-966
-1103
-1038
+5
+569
+121
+641
 Spring_mean_temp
 17.0
 1
@@ -400,10 +400,10 @@ Spring_mean_temp
 Number
 
 INPUTBOX
-987
-1036
-1113
-1106
+0
+642
+126
+712
 Summer_mean_temp
 21.0
 1
@@ -411,10 +411,10 @@ Summer_mean_temp
 Number
 
 INPUTBOX
-1115
-834
-1213
-902
+127
+434
+225
+502
 Fall_temp_STDEV
 4.0
 1
@@ -422,10 +422,10 @@ Fall_temp_STDEV
 Number
 
 INPUTBOX
-1106
-903
-1227
-968
+125
+501
+246
+566
 Winter_temp_STDEV
 3.0
 1
@@ -433,10 +433,10 @@ Winter_temp_STDEV
 Number
 
 INPUTBOX
-1110
-983
-1238
-1048
+120
+574
+248
+639
 Spring_temp_STDEV
 3.0
 1
@@ -444,10 +444,10 @@ Spring_temp_STDEV
 Number
 
 INPUTBOX
-1116
-1040
-1242
-1105
+126
+643
+252
+708
 Summer_temp_STDEV
 4.0
 1
@@ -455,10 +455,10 @@ Summer_temp_STDEV
 Number
 
 INPUTBOX
-1014
-1118
-1082
-1183
+58
+714
+126
+779
 Mean_Sal
 29.0
 1
@@ -466,10 +466,10 @@ Mean_Sal
 Number
 
 INPUTBOX
-1110
-1116
-1185
-1182
+127
+714
+202
+780
 Sal_STDEV
 2.0
 1
@@ -477,60 +477,60 @@ Sal_STDEV
 Number
 
 TEXTBOX
-1220
-848
-1346
-887
+232
+447
+358
+486
 Default Fall Values: 18,4
 15
 0.0
 1
 
 TEXTBOX
-1234
-915
-1373
-954
+249
+499
+388
+538
 Default Winter Values: 11,3
 15
 0.0
 1
 
 TEXTBOX
-1251
-976
-1409
-1024
+252
+573
+410
+621
 Deault Spring Values:\n17,3
 15
 0.0
 1
 
 TEXTBOX
-1256
-1045
-1423
-1083
+256
+644
+423
+682
 Default Summer Values:\n21,4
 15
 0.0
 1
 
 TEXTBOX
-1210
-1127
-1377
-1165
+254
+724
+421
+762
 Default Salinity Values:\n29,2
 15
 0.0
 1
 
 INPUTBOX
-1373
-846
-1462
-906
+498
+486
+588
+552
 Starvation_start
 200.0
 1
@@ -538,10 +538,10 @@ Starvation_start
 Number
 
 INPUTBOX
-1373
-903
-1476
-963
+492
+558
+597
+628
 Starvation_Length
 100.0
 1
@@ -549,20 +549,20 @@ Starvation_Length
 Number
 
 CHOOSER
-1350
-799
-1514
-844
+473
+439
+637
+484
 Starvation_Start_Trigger
 Starvation_Start_Trigger
 "Biomass" "Remaining Nitrogen" "Time"
 2
 
 SLIDER
-1315
-757
-1538
-790
+439
+396
+662
+429
 Ressuplement_Nitrogen_Amount
 Ressuplement_Nitrogen_Amount
 0
@@ -574,10 +574,10 @@ mg/L
 HORIZONTAL
 
 SWITCH
-1049
-692
-1231
-725
+189
+289
+371
+322
 Starve_for_Lipid_Production
 Starve_for_Lipid_Production
 1
@@ -585,12 +585,32 @@ Starve_for_Lipid_Production
 -1000
 
 TEXTBOX
-506
-587
-867
-729
+42
+17
+403
+159
 READ INFO TAB BEFORE YOU USE THE MODEL
 40
+0.0
+1
+
+TEXTBOX
+48
+336
+717
+395
+Biomass Production  Starve for Lipids
+40
+0.0
+1
+
+TEXTBOX
+2
+860
+217
+892
+IGNORE THESE
+20
 0.0
 1
 
@@ -1150,12 +1170,12 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 981 374 60 40
             org.nlogo.sdm.gui.WrappedStock "Resupplement_Lipid_Growth" "(0)" 1
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1064 393 30 30
-        org.nlogo.sdm.gui.RateConnection 3 1094 412 1138 423 1182 436 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.RateConnection 3 1093 412 1138 424 1182 436 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 174
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.nlogo.sdm.gui.WrappedRate "Resupplement_Lipid_Growth" "Resupplement_Lipid_Growth_in"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 10 0
-        org.nlogo.sdm.gui.BindingConnection 2 1053 403 1138 423 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 1053 404 1138 424 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 172
             org.nlogo.sdm.gui.ChopRateConnector REF 175
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1154 261 60 40
