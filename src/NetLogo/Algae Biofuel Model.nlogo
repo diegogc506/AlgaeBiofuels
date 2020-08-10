@@ -211,7 +211,7 @@ SLIDER
 12
 389
 187
-423
+422
 user-mg/L-Nitrogen
 user-mg/L-Nitrogen
 0
@@ -321,7 +321,7 @@ SLIDER
 189
 392
 309
-426
+425
 Harvest_Point
 Harvest_Point
 0
@@ -684,7 +684,7 @@ If Starve for Lipid Production is **ON**, set the following values:
 
 [Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3) From [Kaggle](https://www.kaggle.com/)/[OpenEI](https://openei.org/wiki/ATP3_Data)
 
-Lipid Starvation Model: [Institute of Systems Biology](https://isbscience.org/) Data on How Different Nutrients Effect Lipid Production
+[Lipid Starvation Model](https://baliga.systemsbiology.net/projects/green-algae-biofuels/): [Institute of Systems Biology](https://isbscience.org/) Data on How Different Nutrients Effect Lipid Production
 @#$#@#$#@
 default
 true
@@ -1170,12 +1170,12 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 981 374 60 40
             org.nlogo.sdm.gui.WrappedStock "Resupplement_Lipid_Growth" "(0)" 1
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1064 393 30 30
-        org.nlogo.sdm.gui.RateConnection 3 1093 412 1138 424 1182 436 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.RateConnection 3 1093 412 1137 424 1182 436 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 174
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.nlogo.sdm.gui.WrappedRate "Resupplement_Lipid_Growth" "Resupplement_Lipid_Growth_in"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 10 0
-        org.nlogo.sdm.gui.BindingConnection 2 1053 404 1138 424 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 1053 404 1137 424 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 172
             org.nlogo.sdm.gui.ChopRateConnector REF 175
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1154 261 60 40
