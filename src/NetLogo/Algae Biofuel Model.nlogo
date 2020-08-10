@@ -580,7 +580,7 @@ SWITCH
 725
 Starve_for_Lipid_Production
 Starve_for_Lipid_Production
-0
+1
 1
 -1000
 
@@ -626,7 +626,7 @@ If **OFF** set the following values as you see fit, or leave to their defaults:
 	- Average Temperature and Standard Deviation of Temperature for each season, listed as [Season]_mean_temp and [Season]_temp_STDEV, respectively, used to generate the temperature of the pond throughout the cycle.
 	- Mean_Sal, and Sal_STDEV, the mean salinity and standard deviation of salinity for the pond, to generate the salinity of the pond throughout the cycle.
 	user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
-	- Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 in 100%.
+	- Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 is 100%.
 
 If Starve for Lipid Production is **ON**, set the following values:
 	- Ressuplement Nitrogen Amount, the among of nitrogen in mg/L added after the starvation period is over
@@ -662,7 +662,7 @@ If Starve for Lipid Production is **ON**, set the following values:
 
 ## CREDITS AND REFERENCES
 
-[Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3)
+[Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3) From [Kaggle](https://www.kaggle.com/)/[OpenEI](https://openei.org/wiki/ATP3_Data)
 
 Lipid Starvation Model: [Institute of Systems Biology](https://isbscience.org/) Data on How Different Nutrients Effect Lipid Production
 @#$#@#$#@
@@ -1150,12 +1150,12 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 981 374 60 40
             org.nlogo.sdm.gui.WrappedStock "Resupplement_Lipid_Growth" "(0)" 1
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1064 393 30 30
-        org.nlogo.sdm.gui.RateConnection 3 1094 410 1138 416 1182 432 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.RateConnection 3 1094 412 1138 423 1182 436 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 174
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.nlogo.sdm.gui.WrappedRate "Resupplement_Lipid_Growth" "Resupplement_Lipid_Growth_in"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 10 0
-        org.nlogo.sdm.gui.BindingConnection 2 1053 402 1138 416 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 1053 403 1138 423 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 172
             org.nlogo.sdm.gui.ChopRateConnector REF 175
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 1154 261 60 40
