@@ -630,7 +630,7 @@ CHOOSER
 Strain
 Strain
 "KA32 - Nannochloropsis Oceanica" "LRB-AZ-1201 - Chlorella Vulgaris"
-1
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
