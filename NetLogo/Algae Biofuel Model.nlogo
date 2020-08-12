@@ -641,9 +641,9 @@ This model explores the growth of algae and the production of lipids for the eve
 
 There are two variations in the model:
 
-The first option, as mentioned before, models the accumulation of biomass in a raceway pond with a size 3.5 m by 1.5 m and 35 cm in depth (1025 L nominal volume at 25 cm working depth, with a surface area of 4.2 m<sup>2</sup> including the paddlewheel area), with a variety of factors that can be influenced by the user, with the algal strain KA32 - Nannochloropsis Oceanica – Cellana. 
+The first option, as mentioned before, models the accumulation of biomass in a raceway pond with a size 3.5 m by 1.5 m and 35 cm in depth (1025 L nominal volume at 25 cm working depth, with a surface area of 4.2 m<sup>2</sup> including the paddlewheel area), with a variety of factors that can be influenced by the user, with the algae strain being  KA32 - _Nannochloropsis Oceanica_ – Cellana, or LRB-AZ-1201 - _Chlorella Vulgaris_ - Arizona State University.
 
-The second option, also mentioned earlier, models the accumulation of lipids in algae based off of lab data during three phases of algae cultivation, Repletion, Starvation, and Resupplementation, and is less representative of a full scale solution, because the data used to produce this part of the model came from a laboratory testing. The algal strain used is Chlamydomonas reinhardtii CC-1690. 
+The second option, also mentioned earlier, models the accumulation of lipids in algae based off of lab data during three phases of algae cultivation, Repletion, Starvation, and Resupplementation, and is less representative of a full scale solution, because the data used to produce this part of the model came from a laboratory testing. The algal strain used is _Chlamydomonas reinhardtii_ CC-1690. 
 
 Both options in the model uses a combination of custom code and NetLogo’s Systems Dynamics Modeler.
 
@@ -661,17 +661,33 @@ There are many inputs you can choose to manipulate:
  	- Starve for Lipid Production is the most important one.
 
 If **OFF** set the following values as you see fit, or leave to their defaults:
-	- Average Temperature and Standard Deviation of Temperature for each season, listed as [Season]_mean_temp and [Season]_temp_STDEV, respectively, used to generate the temperature of the pond throughout the cycle.
-	- Mean_Sal, and Sal_STDEV, the mean salinity and standard deviation of salinity for the pond, to generate the salinity of the pond throughout the cycle.
-	user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
-	- Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 is 100%.
+
+   -**The most important of these** is Strain.
+
+   -If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
+
+   -If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
+
+   - Average Temperature and Standard Deviation of Temperature for each season, listed as [Season]_mean_temp and [Season]_temp_STDEV, respectively, used to generate the temperature of the pond throughout the cycle.
+
+   - Mean_Sal, and Sal_STDEV, the mean salinity and standard deviation of salinity for the pond, to generate the salinity of the pond throughout the cycle.
+
+   -user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
+
+   - Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 is 100%.
 
 If Starve for Lipid Production is **ON**, set the following values:
-	- Ressuplement Nitrogen Amount, the among of nitrogen in mg/L added after the starvation period is over
-	- Starvation Start trigger, which allows you to choose how the start of starvation is triggered. **OPTIONS**: Time, Biomass, Remaining Nitrogen
+
+    - Ressuplement Nitrogen Amount, the among of nitrogen in mg/L added after the starvation period is over
+
+    - Starvation Start trigger, which allows you to choose how the start of starvation is triggered. **OPTIONS**: Time, Biomass, Remaining Nitrogen
+
 		- For Starvation Start, if you choose Time as the trigger, set the number of Ticks/Hours after cultivation starts for the starvation period to start.
+
 		- If you choose Biomass as your trigger, set starvation start to the amount of biomass in mg that you want there to be before starvation starts.
+
 		- If you choose Remaining Nitrogen, it is a bit more complicated; the number you choose for Starvation start has to be below user-mg/L-Nitrogen, and is the amount of nitrogen you want left in the model before the algae is washed and starved.
+
 	- Starvation Length is the amount of Time, Hours/Ticks, that the Starvation Period lasts for
 
 
