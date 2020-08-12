@@ -126,10 +126,18 @@ to Start
     set Salinity random-normal Mean_Sal Sal_STDEV
     set Sal Salinity
     set Temperature Temp
+    if Strain = "KA32 - Nannochloropsis Oceanica" [
+      set Biomass_Growth Growth_biomass_KA32
+      set Lipid_Growth Growth_lipid_KA32
+    ]
+    if Strain = "LRB-AZ-1201 - Chlorella Vulgaris" [
+      set Biomass_Growth Growth_biomass_LRB-AZ-1201
+      set Lipid_Growth Growth_lipid_LRB-AZ-1201
+
+    ]
     ;if Biomass > ((Max_biomass)*(Harvest_Point)) [set Lipid ((1)*(Max_lipid)/(4))]
     if (Biomass > ((Max_biomass)*(Harvest_Point))) and starving = False [set Biomass ((1)*(Max_biomass)/(4))]
-    set lipid ((((lipid_holder)*(Biomass))/(5))/(Biomass))set Biomass_Growth Growth_biomass
-    set Lipid_Growth Growth_lipid
+    set lipid ((((lipid_holder)*(Biomass))/(5))/(Biomass))
     set Nitrogen_Consumption ((Biomass)/(7500))
 
   ]
@@ -278,7 +286,7 @@ Temp
 Temp
 0
 100
-11.459027785075884
+11.198659491965774
 1
 1
 C
@@ -293,7 +301,7 @@ Salinity
 Salinity
 0
 100
-28.097460382882627
+28.55683187890924
 1
 1
 g/L
@@ -1005,7 +1013,7 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 1.0
-    org.nlogo.sdm.gui.AggregateDrawing 77
+    org.nlogo.sdm.gui.AggregateDrawing 79
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 255 437 50 50
             org.nlogo.sdm.gui.WrappedConverter "user-mg/L-Nitrogen" "mg/L-Nitrogen-init"
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 928 548 60 40
@@ -1042,8 +1050,8 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 349 663 50 50
             org.nlogo.sdm.gui.WrappedConverter "(150)" "Carrying_cap_Lip"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 897 843 30 30
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 987 113 50 50
-            org.nlogo.sdm.gui.WrappedConverter "((0.75)*((23.0475890503587)+((Water_Salinity)*(-0.224999652))+((Water_Temp)*(-0.0918736809))+((mg/L-Nitrogen)*(-0.0251703051))))" "Growth_lipid"
+        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 989 52 50 50
+            org.nlogo.sdm.gui.WrappedConverter "((0.75)*((23.0475890503587)+((Water_Salinity)*(-0.224999652))+((Water_Temp)*(-0.0918736809))+((mg/L-Nitrogen)*(-0.0251703051))))" "Growth_lipid_KA32"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1198 309 30 30
         org.nlogo.sdm.gui.RateConnection 3 1214 339 1217 378 1220 417 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 39
@@ -1060,7 +1068,7 @@ NetLogo 6.1.1
             org.jhotdraw.standard.ChopBoxConnector REF 9
             org.nlogo.sdm.gui.ChopRateConnector REF 45
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 820 61 50 50
-            org.nlogo.sdm.gui.WrappedConverter "((1412.190284490395)+((Water_Salinity)*(-14.99713305))+((Water_Temp)*(-5.9535476325))+((mg/L-Nitrogen)*(-0.76706874))+((PAR_Light)*(-0.1451240891421969)))" "Growth_biomass"
+            org.nlogo.sdm.gui.WrappedConverter "((1412.190284490395)+((Water_Salinity)*(-14.99713305))+((Water_Temp)*(-5.9535476325))+((mg/L-Nitrogen)*(-0.76706874))+((PAR_Light)*(-0.1451240891421969)))" "Growth_biomass_KA32"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 915 338 30 30
         org.nlogo.sdm.gui.RateConnection 3 916 353 836 351 756 349 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 56
@@ -1193,6 +1201,10 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.BindingConnection 2 1224 313 1289 363 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 183
             org.nlogo.sdm.gui.ChopRateConnector REF 45
+        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 837 142 50 50
+            org.nlogo.sdm.gui.WrappedConverter "(0)" "Growth_Biomass_LRB-AZ-1201"
+        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 1002 119 50 50
+            org.nlogo.sdm.gui.WrappedConverter "(0)" "Growth_lipid_LRB-AZ-1201"
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
