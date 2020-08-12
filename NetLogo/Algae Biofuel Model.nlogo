@@ -662,17 +662,17 @@ There are many inputs you can choose to manipulate:
 
 If **OFF** set the following values as you see fit, or leave to their defaults:
 
-   -**The most important of these** is Strain.
+   - **The most important of these** is Strain.
 
-   -If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
+   	- If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
 
-   -If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
+   	- If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
 
    - Average Temperature and Standard Deviation of Temperature for each season, listed as [Season]_mean_temp and [Season]_temp_STDEV, respectively, used to generate the temperature of the pond throughout the cycle.
 
    - Mean_Sal, and Sal_STDEV, the mean salinity and standard deviation of salinity for the pond, to generate the salinity of the pond throughout the cycle.
 
-   -user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
+   - user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
 
    - Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 is 100%.
 
@@ -693,25 +693,25 @@ If Starve for Lipid Production is **ON**, set the following values:
 
 ## THINGS TO NOTICE
 
--Think about if the output make sense, for example, when nitrogen is lower, lipids should be higher. If you do not see that, why?
--Think about what should have an effect. Do some research, does what you find online match with what you see, why or why not?
--What causes the pond to crash/stop working?
+- Think about if the output make sense, for example, when nitrogen is lower, lipids should be higher. If you do not see that, why?
+- Think about what should have an effect. Do some research, does what you find online match with what you see, why or why not?
+- What causes the pond to crash/stop working?
 
 ## THINGS TO TRY
 
--Try moving sliders to extremes
--Try setting all values close to each other
--Try to cause a quick pond crash
+- Try moving sliders to extremes
+- Try setting all values close to each other
+- Try to cause a quick pond crash
 
 ## EXTENDING THE MODEL
 
--There are some extra lines of code, to make a list of values that can be exported at the end of the run with some code, make it to get values out
--Figure out how to plot other variables, and plot ones that you think might be important
+- There are some extra lines of code, to make a list of values that can be exported at the end of the run with some code, make it to get values out
+- Figure out how to plot other variables, and plot ones that you think might be important
 
 ## NETLOGO FEATURES
 
--The model uses large and stacked IF queries
--The model relies heavily on stocks and Systems Dynamics
+- The model uses large and stacked IF queries
+- The model relies heavily on stocks and Systems Dynamics
 
 
 ## CREDITS AND REFERENCES
