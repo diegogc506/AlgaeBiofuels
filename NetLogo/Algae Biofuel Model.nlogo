@@ -208,10 +208,10 @@ NIL
 1
 
 SLIDER
-12
-389
-187
-422
+22
+442
+197
+475
 user-mg/L-Nitrogen
 user-mg/L-Nitrogen
 0
@@ -318,10 +318,10 @@ PENS
 "Lipid_Holder" 1.0 0 -13840069 true "" ""
 
 SLIDER
-189
-392
-309
-425
+199
+445
+319
+478
 Harvest_Point
 Harvest_Point
 0
@@ -367,10 +367,10 @@ NIL
 HORIZONTAL
 
 INPUTBOX
-12
-436
-126
-500
+22
+489
+136
+553
 Fall_mean_temp
 18.0
 1
@@ -378,10 +378,10 @@ Fall_mean_temp
 Number
 
 INPUTBOX
-15
-502
-124
-571
+25
+555
+134
+624
 Winter_mean_temp
 11.0
 1
@@ -389,10 +389,10 @@ Winter_mean_temp
 Number
 
 INPUTBOX
-5
-569
-121
-641
+15
+622
+131
+694
 Spring_mean_temp
 17.0
 1
@@ -400,10 +400,10 @@ Spring_mean_temp
 Number
 
 INPUTBOX
-0
-642
-126
-712
+10
+695
+136
+765
 Summer_mean_temp
 21.0
 1
@@ -411,10 +411,10 @@ Summer_mean_temp
 Number
 
 INPUTBOX
-127
-434
-225
-502
+137
+487
+235
+555
 Fall_temp_STDEV
 4.0
 1
@@ -422,10 +422,10 @@ Fall_temp_STDEV
 Number
 
 INPUTBOX
-125
-501
-246
-566
+135
+554
+256
+619
 Winter_temp_STDEV
 3.0
 1
@@ -433,10 +433,10 @@ Winter_temp_STDEV
 Number
 
 INPUTBOX
-120
-574
-248
-639
+130
+627
+258
+692
 Spring_temp_STDEV
 3.0
 1
@@ -444,10 +444,10 @@ Spring_temp_STDEV
 Number
 
 INPUTBOX
-126
-643
-252
-708
+136
+696
+262
+761
 Summer_temp_STDEV
 4.0
 1
@@ -455,10 +455,10 @@ Summer_temp_STDEV
 Number
 
 INPUTBOX
-58
-714
-126
-779
+68
+767
+136
+832
 Mean_Sal
 29.0
 1
@@ -466,10 +466,10 @@ Mean_Sal
 Number
 
 INPUTBOX
-127
-714
-202
-780
+137
+767
+212
+833
 Sal_STDEV
 2.0
 1
@@ -477,50 +477,50 @@ Sal_STDEV
 Number
 
 TEXTBOX
-232
-447
-358
-486
+242
+500
+368
+539
 Default Fall Values: 18,4
 15
 0.0
 1
 
 TEXTBOX
-249
-499
-388
-538
+259
+552
+398
+591
 Default Winter Values: 11,3
 15
 0.0
 1
 
 TEXTBOX
-252
-573
-410
-621
+262
+626
+420
+674
 Deault Spring Values:\n17,3
 15
 0.0
 1
 
 TEXTBOX
-256
-644
-423
-682
+266
+697
+433
+735
 Default Summer Values:\n21,4
 15
 0.0
 1
 
 TEXTBOX
-254
-724
-421
-762
+264
+777
+431
+815
 Default Salinity Values:\n29,2
 15
 0.0
@@ -613,6 +613,16 @@ IGNORE THESE
 20
 0.0
 1
+
+CHOOSER
+61
+389
+294
+434
+Strain
+Strain
+"KA32 - Nannochloropsis Oceanica" "LRB-AZ-1201 - Chlorella Vulgaris"
+0
 
 @#$#@#$#@
 ## WHAT IS IT?
