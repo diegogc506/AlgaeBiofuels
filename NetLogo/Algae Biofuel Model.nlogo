@@ -614,9 +614,9 @@ HORIZONTAL
 
 SWITCH
 189
-289
+282
 371
-322
+315
 Starve_for_Lipid_Production
 Starve_for_Lipid_Production
 1
