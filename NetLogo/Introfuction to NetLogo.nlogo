@@ -4,6 +4,7 @@ to Setup
 end
 
 to Start
+  set Lipid% Lipid%_calc
   system-dynamics-go
   set-current-plot "Nutrients"
   system-dynamics-do-plot
@@ -115,6 +116,40 @@ true
 "" ""
 PENS
 "Lipid%" 1.0 0 -12087248 true "" ""
+
+BUTTON
+82
+50
+146
+83
+NIL
+Setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+156
+47
+219
+80
+Run
+Start
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
 
 @#$#@#$#@
 ## WHAT IS IT?
