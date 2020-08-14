@@ -8,6 +8,7 @@ to Setup
   set Model_Salinity 0
 end
 to Start
+  if Nitrogen = 0 [stop]
   set Lipid% Lipid%_calc
   system-dynamics-go
   set-current-plot "Nutrients"
@@ -101,7 +102,7 @@ true
 true
 "" ""
 PENS
-"Biomass" 1.0 0 -8330359 true "" ""
+"Biomass" 1.0 0 -8732573 true "" ""
 
 PLOT
 1041
@@ -145,7 +146,7 @@ BUTTON
 80
 Run
 Start
-NIL
+T
 1
 T
 OBSERVER
@@ -164,7 +165,7 @@ user-Nitrogen
 user-Nitrogen
 0
 100
-50.0
+100.0
 1
 1
 mg/L
@@ -548,7 +549,7 @@ NetLogo 6.1.1
 1.0
     org.nlogo.sdm.gui.AggregateDrawing 36
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 967 450 60 40
-            org.nlogo.sdm.gui.WrappedStock "Biomass" "(0)" 1
+            org.nlogo.sdm.gui.WrappedStock "Biomass" "(1)" 1
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 359 470 60 40
             org.nlogo.sdm.gui.WrappedStock "Lipid" "(0)" 1
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 572 109 50 50
@@ -571,13 +572,13 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.RateConnection 3 409 384 412 322 410 458 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 21
             org.jhotdraw.standard.ChopBoxConnector REF 3
-            org.nlogo.sdm.gui.WrappedRate "" ""
+            org.nlogo.sdm.gui.WrappedRate "( ( Nitrogen_passthrough / 6) + ( Temperature_passthrough / 10) + ( Salinity_passthrough / 8) )" "Lipid_Growth"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 4 0
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 901 452 30 30
         org.nlogo.sdm.gui.RateConnection 3 902 467 679 469 955 469 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 27
             org.jhotdraw.standard.ChopBoxConnector REF 1
-            org.nlogo.sdm.gui.WrappedRate "" ""
+            org.nlogo.sdm.gui.WrappedRate "( Nitrogen_passthrough + Temperature_passthrough + Salinity_passthrough ) / 3" "Biomass_Growth"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 2 0
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 731 569 60 40
             org.nlogo.sdm.gui.WrappedStock "Lipid%" "(0)" 1
@@ -633,7 +634,7 @@ NetLogo 6.1.1
             org.jhotdraw.standard.ChopBoxConnector REF 65
             org.jhotdraw.figures.ChopEllipseConnector
                 org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1530 264 30 30
-            org.nlogo.sdm.gui.WrappedRate "" "" REF 66
+            org.nlogo.sdm.gui.WrappedRate "Biomass_Passthrough / 50" "Nitrogen_Consuption" REF 66
                 org.nlogo.sdm.gui.WrappedReservoir  0   REF 86
         org.nlogo.sdm.gui.BindingConnection 2 1039 468 1160 464 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 1
