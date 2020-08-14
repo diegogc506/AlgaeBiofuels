@@ -1,8 +1,27 @@
+globals[Model_Nitrogen Model_Salinity Model_Temperature
+]
 to Setup
   ca
   system-dynamics-setup
+  set Model_Temperature 0
+  set Model_Nitrogen 0
+  set Model_Salinity 0
 end
-
+to Temperature_exp
+  set Model_Temperature 1
+  set Model_Nitrogen 0
+  set Model_Salinity 0
+end
+to Salinity_exp
+  set Model_Salinity 1
+  set Model_Temperature 0
+  set Model_Nitrogen 0
+end
+to Nitrogen_exp
+  set Model_Nitrogen 1
+  set Model_Temperature 0
+  set Model_Salinity 0
+end
 to Start
   set Lipid% Lipid%_calc
   system-dynamics-go
@@ -141,6 +160,57 @@ BUTTON
 80
 Run
 Start
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+63
+203
+166
+236
+Temperature
+Temperature_exp
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+176
+204
+247
+237
+Salinity
+Salinity_exp
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+257
+201
+336
+234
+Nitrogen
+Nitrogen_exp
 NIL
 1
 T
