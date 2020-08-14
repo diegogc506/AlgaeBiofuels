@@ -578,7 +578,7 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.RateConnection 3 902 467 679 469 955 469 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 27
             org.jhotdraw.standard.ChopBoxConnector REF 1
-            org.nlogo.sdm.gui.WrappedRate "( Nitrogen_passthrough + Temperature_passthrough + Salinity_passthrough ) / 3" "Biomass_Growth"
+            org.nlogo.sdm.gui.WrappedRate "( (Nitrogen_passthrough / 3) + (Temperature_passthrough / 2) + ( Salinity_passthrough / 3) )" "Biomass_Growth"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 2 0
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 731 569 60 40
             org.nlogo.sdm.gui.WrappedStock "Lipid%" "(0)" 1
