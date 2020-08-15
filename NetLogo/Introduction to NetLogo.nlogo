@@ -24,11 +24,11 @@ end
 GRAPHICS-WINDOW
 0
 10
-9
-20
+33
+44
 -1
 -1
-1.0
+25.0
 1
 10
 1
@@ -49,10 +49,10 @@ ticks
 30.0
 
 PLOT
-1032
-403
-1438
-758
+230
+370
+636
+725
 Nutrients
 Time
 NIL
@@ -69,10 +69,10 @@ PENS
 "Salinity" 1.0 0 -10899396 true "" ""
 
 PLOT
-617
-44
-1000
-378
+272
+21
+655
+355
 Lipid Levels
 Time
 NIL
@@ -87,10 +87,10 @@ PENS
 "Lipid" 1.0 0 -13840069 true "" ""
 
 PLOT
-614
-397
-1002
-756
+650
+393
+1038
+752
 Biomass Levels
 Time
 NIL
@@ -105,10 +105,10 @@ PENS
 "Biomass" 1.0 0 -8732573 true "" ""
 
 PLOT
-1041
-40
-1427
-391
+696
+17
+1082
+368
 Lipid%
 Time
 %
@@ -140,10 +140,10 @@ NIL
 1
 
 BUTTON
-156
-47
-219
-80
+153
+43
+216
+76
 Run
 Start
 T
@@ -165,7 +165,7 @@ user-Nitrogen
 user-Nitrogen
 0
 100
-100.0
+15.0
 1
 1
 mg/L
@@ -180,7 +180,7 @@ user-Temperature
 user-Temperature
 15
 35
-25.0
+33.0
 0.5
 1
 Degrees C
@@ -569,13 +569,13 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 722 761 50 50
             org.nlogo.sdm.gui.WrappedConverter "Lipid_for_calc * 100 / Biomass_for_calc" "Lipid%_calc"
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 393 383 30 30
-        org.nlogo.sdm.gui.RateConnection 3 409 384 412 322 410 458 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.RateConnection 3 407 413 403 435 397 458 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 21
             org.jhotdraw.standard.ChopBoxConnector REF 3
             org.nlogo.sdm.gui.WrappedRate "( ( Nitrogen_passthrough / 6) + ( Temperature_passthrough / 10) + ( Salinity_passthrough / 8) )" "Lipid_Growth"
                 org.nlogo.sdm.gui.WrappedReservoir  REF 4 0
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 901 452 30 30
-        org.nlogo.sdm.gui.RateConnection 3 902 467 679 469 955 469 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.RateConnection 3 931 468 943 468 955 468 NULL NULL 0 0 0
             org.jhotdraw.figures.ChopEllipseConnector REF 27
             org.jhotdraw.standard.ChopBoxConnector REF 1
             org.nlogo.sdm.gui.WrappedRate "( (Nitrogen_passthrough / 3) + (Temperature_passthrough / 2) + ( Salinity_passthrough / 3) )" "Biomass_Growth"
@@ -597,19 +597,19 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.BindingConnection 2 748 762 757 612 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 19
             org.jhotdraw.contrib.ChopDiamondConnector REF 13
-        org.nlogo.sdm.gui.BindingConnection 2 586 148 412 322 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 587 149 403 435 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 5
             org.nlogo.sdm.gui.ChopRateConnector REF 22
-        org.nlogo.sdm.gui.BindingConnection 2 537 235 412 322 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 538 236 403 435 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 7
             org.nlogo.sdm.gui.ChopRateConnector REF 22
-        org.nlogo.sdm.gui.BindingConnection 2 606 149 679 469 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 609 146 943 468 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 5
             org.nlogo.sdm.gui.ChopRateConnector REF 28
-        org.nlogo.sdm.gui.BindingConnection 2 562 233 679 469 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 564 231 943 468 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 7
             org.nlogo.sdm.gui.ChopRateConnector REF 28
-        org.nlogo.sdm.gui.BindingConnection 2 520 298 679 469 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 522 296 943 468 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 11
             org.nlogo.sdm.gui.ChopRateConnector REF 28
         org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 777 262 60 40
@@ -627,10 +627,10 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.BindingConnection 2 768 129 621 133 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 72
             org.jhotdraw.contrib.ChopDiamondConnector REF 5
-        org.nlogo.sdm.gui.BindingConnection 2 492 301 412 322 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 494 303 403 435 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 11
             org.nlogo.sdm.gui.ChopRateConnector REF 22
-        org.nlogo.sdm.gui.RateConnection 3 849 281 1179 281 1531 279 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.RateConnection 3 849 281 1190 280 1531 279 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 65
             org.jhotdraw.figures.ChopEllipseConnector
                 org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1530 264 30 30
@@ -639,7 +639,7 @@ NetLogo 6.1.1
         org.nlogo.sdm.gui.BindingConnection 2 1039 468 1160 464 NULL NULL 0 0 0
             org.jhotdraw.standard.ChopBoxConnector REF 1
             org.jhotdraw.contrib.ChopDiamondConnector REF 17
-        org.nlogo.sdm.gui.BindingConnection 2 1185 439 1179 281 NULL NULL 0 0 0
+        org.nlogo.sdm.gui.BindingConnection 2 1185 439 1190 280 NULL NULL 0 0 0
             org.jhotdraw.contrib.ChopDiamondConnector REF 17
             org.nlogo.sdm.gui.ChopRateConnector REF 83
 @#$#@#$#@
