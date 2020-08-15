@@ -11,7 +11,7 @@ Plan for Raceway_Model:
 		• Light
 		• Salinity
 		• Temperature
-	• > 3 outputs:
+	• >= 3 outputs:
 		• FAME as Lipids
 		• Biomass as Biomass
 		• FAME% as Lipid%
@@ -28,22 +28,22 @@ Plan for Raceway_Model:
 	
 Plan for Lab_Sim_Model:
 
-	• 4 inputs:
-		•
-		•
-		•
-		•
+	• n inputs:
+		• Nitrogen
+		• 
+		• 
+		• 
 	• n outputs:
-		•
-		•
-		•
-		•
-		•
+		• FAME as Lipids
+		• Biomass as Biomass
+		• FAME% as Lipid%
+		• 
+		• 
 	• n Graphs:
-		•
-		•
-		•
-		•
-		•
-		•
+		• Lipids as Lipid Levels
+		• Biomass as Biomass Levels
+		• FAME% as Lipid%
+		• Nitrogen as Nitrogen Levels
+		• 
+		• 
 	•
