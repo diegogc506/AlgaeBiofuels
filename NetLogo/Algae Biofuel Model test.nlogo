@@ -1,14 +1,5 @@
-globals [
-  has_Starved
-  starving
-  Starving_start_time
-  Starving_end_time
-  Resupplementing
-  lipid_in2
-  lipid_out
-  model_number
-  lipid_decrease_for
-  ;; constants
+globals [has_Starved starving Starving_start_time Starving_end_time Resupplementing lipid_in2 lipid_out model_number lipid_decrease_for
+    ;; constants
   Carrying_cap_Bio
   Carrying_cap_Lip
   Max_lipid_KA32
@@ -37,6 +28,177 @@ globals [
   dt
 ]
 
+to Setup
+  file-close-all ; Close any files open from last run
+  file-open "CSV files/actually_processed_new.csv"
+  ca
+  system-dynamics-setup
+  set has_Starved False
+  set starving False
+  set Starving_start_time 100000000
+  set Starving_end_time 0
+  set Resupplementing False
+  set lipid_in2 []
+  set lipid_out []
+  set Resupplement_Lipid_Loss 0
+  set Resupplement_Biomass_Growth 0
+  set Resupplement_Lipid_Growth 0
+end
+to Start
+
+
+  if  Starve_for_Lipid_Production [
+    set S-curve 0
+    if (((Starvation_Start_Trigger = "Biomass") and (Biomass >= Starvation_start)) and (has_Starved = False)) [
+      set has_Starved True
+      set starving True
+      set Starving_start_time Ticks
+      set Starving_end_time ((Starving_start_time)+(Starvation_length))
+      set mg/L-Nitrogen 0
+      set Biomass_Growth 0
+      set Lipid_Growth 0
+      set Lipid_Starve_Growth 0
+      set Biomass_Starve_Growth 27140.12680685151
+   ]
+   if (((Starvation_Start_Trigger = "Time") and (Ticks = Starvation_start)) and (has_Starved = False)) [
+     set has_Starved True
+     set starving True
+     set Starving_start_time Ticks
+     set Starving_end_time ((Starving_start_time)+(Starvation_length))
+     set mg/L-Nitrogen 0
+     set Biomass_Growth 0
+     set Lipid_Growth 0
+     set Lipid_Starve_Growth 0
+     set Biomass_Starve_Growth 27140.12680685151
+   ]
+   if starving [
+     set mg/L-Nitrogen 0
+     set Biomass_Growth 0
+     set Biomass_Starve_Growth 27140.12680685151
+     set Lipid_Growth 0
+     set Lipid_Starve_Growth ((219.19277649586314)*(1))
+     ;room for biomass code
+     ;room for biomass code
+   ]
+   if starving and Ticks = Starving_end_time [
+     set starving False
+     set Resupplementing True
+     set mg/L-Nitrogen Ressuplement_Nitrogen_Amount
+     set lipid_decrease_for ((Ticks)+(10))
+     ;room for intermediate code
+   ]
+   if Resupplementing [
+    set Biomass_Growth 0
+    set Biomass_Starve_Growth 0
+    set Lipid_Growth 0
+    set Lipid_Starve_Growth 0
+    if Ticks < lipid_decrease_for [
+       set Resupplement_Lipid_Loss ((50.155944469522325)*(2))
+    ]
+      if Ticks > lipid_decrease_for [
+        set Resupplement_Lipid_Loss 0
+        set Resupplement_Lipid_Growth ((33.37644629696358)/(9))
+      ]
+    set Resupplement_Biomass_Growth (116210.27305995136)
+
+   ]
+   if (starving = false) and (Resupplementing = False) [
+     set Biomass_Growth ((108482.9982377443))
+
+     set Lipid_Growth (33.37644629696358)
+    ]
+    if (mg/L-Nitrogen = 0) and ((starving) = false) and has_starved [stop]
+    set Nitrogen_Consumption ((Biomass)/(3112071.285022375))
+    set Sal Salinity
+    set Temperature Temp
+  ]
+  if Starve_for_Lipid_Production = false [
+    if mg/L-Nitrogen = 0 [stop]
+
+    ;Temp for season: Fall
+    if (Ticks < 91) and (Ticks >= 0) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
+    ;Temp for season: Winter
+    if (Ticks < 182) and (Ticks >= 91) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
+    ;Temp for season: Spring
+    if (Ticks < 273) and (Ticks >= 182) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
+    ;Temp for season: Summer
+    if (Ticks < 364) and (Ticks >= 273) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+    ;Temp for season: Fall
+    if (Ticks < 455) and (Ticks >= 364) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
+    ;Temp for season: Winter
+    if (Ticks < 546) and (Ticks >= 455) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
+    ;Temp for season: Spring
+    if (Ticks < 637) and (Ticks >= 546) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
+    ;Temp for season: Summer
+    if (Ticks < 728) and (Ticks >= 637) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+    ;Temp for season: Fall
+    if (Ticks < 819) and (Ticks >= 728) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
+    ;Temp for season: Winter
+    if (Ticks < 910) and (Ticks >= 819) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
+    ;Temp for season: Spring
+    if (Ticks < 1001) and (Ticks >= 910) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
+    ;Temp for season: Summer
+    if (Ticks < 1092) and (Ticks >= 1001) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+    ;Temp for season: Fall
+    if (Ticks < 1183) and (Ticks >= 1092) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
+    ;Temp for season: Winter
+    if (Ticks < 1274) and (Ticks >= 1183) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
+    ;Temp for season: Spring
+    if (Ticks < 1365) and (Ticks >= 1274) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
+    ;Temp for season: Summer
+    if (Ticks < 1456) and (Ticks >= 1365) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+    ;Temp for season: Fall
+    if (Ticks < 1547) and (Ticks >= 1456) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
+    ;Temp for season: Winter
+    if (Ticks < 1638) and (Ticks >= 1547) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
+    ;Temp for season: Spring
+    if (Ticks < 1729) and (Ticks >= 1638) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
+    ;Temp for season: Summer
+    if (Ticks < 1820) and (Ticks >= 1729) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+    ;Temp for season: Fall
+    if (Ticks < 1911) and (Ticks >= 1820) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
+    ;Temp for season: Winter
+    if (Ticks < 2002) and (Ticks >= 1911) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
+    ;Temp for season: Spring
+    if (Ticks < 2093) and (Ticks >= 2002) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
+    ;Temp for season: Summer
+    if (Ticks < 2184) and (Ticks >= 2093) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
+    set PAR_Light random-normal 412.73276190717496 100.66482884736547
+    set Salinity random-normal Mean_Sal Sal_STDEV
+    set Sal Salinity
+    set Temperature Temp
+    if Strain = "KA32 - Nannochloropsis Oceanica" [
+      set Biomass_Growth abs Growth_biomass_KA32
+      set Lipid_Growth abs Growth_lipid_KA32
+      set Max_Lipid abs Max_Lipid_KA32
+      Set Max_Biomass abs Max_Biomass_KA32
+    ]
+    if Strain = "LRB-AZ-1201 - Chlorella Vulgaris" [
+      set Biomass_Growth abs Growth_biomass_LRB-AZ-1201
+      set Lipid_Growth abs Growth_lipid_LRB-AZ-1201
+      set Max_Lipid abs Max_Lipid_LRB-AZ-1201
+      set Max_Biomass abs Max_Biomass_LRB-AZ-1201
+    ]
+    if Biomass > ((Max_biomass)*(Harvest_Point)) [set Lipid_Total ((2)*(Max_Lipid)/(3))]
+    if (Biomass > ((Max_biomass)*(Harvest_Point))) and starving = False [set Biomass ((2)*(Max_Biomass)/(3))]
+    set Lipid_Percent ((((Lipid_Total)* 100 /(Biomass))))
+    set Nitrogen_Consumption ((Biomass)/(7500))
+
+  ]
+  print Lipid_in - Lipid_eq
+  system-dynamics-go
+  set-current-plot "Enviroment"
+  system-dynamics-do-plot
+  set-current-plot "Nutrient_levels"
+  system-dynamics-do-plot
+  set-current-plot "Biomass Levels"
+  system-dynamics-do-plot
+  set-current-plot "Lipid Levels"
+  system-dynamics-do-plot
+  set-current-plot "Lipid Pecent"
+  system-dynamics-do-plot
+  set lipid_in2 lput Lipid_in lipid_in2
+end
 ;; Initializes the system dynamics model.
 ;; Call this in your model's SETUP procedure.
 to system-dynamics-setup
@@ -313,179 +475,6 @@ to system-dynamics-do-plot
     plotxy ticks Temperature
   ]
 end
-
-
-to Setup
-  ca
-  system-dynamics-setup
-  set has_Starved False
-  set starving False
-  set Starving_start_time 100000000
-  set Starving_end_time 0
-  set Resupplementing False
-  set lipid_in2 []
-  set lipid_out []
-  set Resupplement_Lipid_Loss 0
-  set Resupplement_Biomass_Growth 0
-  set Resupplement_Lipid_Growth 0
-end
-to Start
-
-
-  if  Starve_for_Lipid_Production [
-    set S-curve 0
-    if (((Starvation_Start_Trigger = "Biomass") and (Biomass >= Starvation_start)) and (has_Starved = False)) [
-      set has_Starved True
-      set starving True
-      set Starving_start_time Ticks
-      set Starving_end_time ((Starving_start_time)+(Starvation_length))
-      set mg/L-Nitrogen 0
-      set Biomass_Growth 0
-      set Lipid_Growth 0
-      set Lipid_Starve_Growth 0
-      set Biomass_Starve_Growth 27140.12680685151
-   ]
-   if (((Starvation_Start_Trigger = "Time") and (Ticks = Starvation_start)) and (has_Starved = False)) [
-     set has_Starved True
-     set starving True
-     set Starving_start_time Ticks
-     set Starving_end_time ((Starving_start_time)+(Starvation_length))
-     set mg/L-Nitrogen 0
-     set Biomass_Growth 0
-     set Lipid_Growth 0
-     set Lipid_Starve_Growth 0
-     set Biomass_Starve_Growth 27140.12680685151
-   ]
-   if starving [
-     set mg/L-Nitrogen 0
-     set Biomass_Growth 0
-     set Biomass_Starve_Growth 27140.12680685151
-     set Lipid_Growth 0
-     set Lipid_Starve_Growth ((219.19277649586314)*(1))
-     ;room for biomass code
-     ;room for biomass code
-   ]
-   if starving and Ticks = Starving_end_time [
-     set starving False
-     set Resupplementing True
-     set mg/L-Nitrogen Ressuplement_Nitrogen_Amount
-     set lipid_decrease_for ((Ticks)+(10))
-     ;room for intermediate code
-   ]
-   if Resupplementing [
-    set Biomass_Growth 0
-    set Biomass_Starve_Growth 0
-    set Lipid_Growth 0
-    set Lipid_Starve_Growth 0
-    if Ticks < lipid_decrease_for [
-       set Resupplement_Lipid_Loss ((50.155944469522325)*(2))
-    ]
-      if Ticks > lipid_decrease_for [
-        set Resupplement_Lipid_Loss 0
-        set Resupplement_Lipid_Growth ((33.37644629696358)/(9))
-      ]
-    set Resupplement_Biomass_Growth (116210.27305995136)
-
-   ]
-   if (starving = false) and (Resupplementing = False) [
-     set Biomass_Growth ((108482.9982377443))
-
-     set Lipid_Growth (33.37644629696358)
-    ]
-    if (mg/L-Nitrogen = 0) and ((starving) = false) and has_starved [stop]
-    set Nitrogen_Consumption ((Biomass)/(3112071.285022375))
-    set Sal Salinity
-    set Temperature Temp
-  ]
-  if Starve_for_Lipid_Production = false [
-    if mg/L-Nitrogen = 0 [stop]
-
-    ;Temp for season: Fall
-    if (Ticks < 91) and (Ticks >= 0) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
-    ;Temp for season: Winter
-    if (Ticks < 182) and (Ticks >= 91) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
-    ;Temp for season: Spring
-    if (Ticks < 273) and (Ticks >= 182) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
-    ;Temp for season: Summer
-    if (Ticks < 364) and (Ticks >= 273) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
-    ;Temp for season: Fall
-    if (Ticks < 455) and (Ticks >= 364) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
-    ;Temp for season: Winter
-    if (Ticks < 546) and (Ticks >= 455) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
-    ;Temp for season: Spring
-    if (Ticks < 637) and (Ticks >= 546) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
-    ;Temp for season: Summer
-    if (Ticks < 728) and (Ticks >= 637) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
-    ;Temp for season: Fall
-    if (Ticks < 819) and (Ticks >= 728) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
-    ;Temp for season: Winter
-    if (Ticks < 910) and (Ticks >= 819) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
-    ;Temp for season: Spring
-    if (Ticks < 1001) and (Ticks >= 910) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
-    ;Temp for season: Summer
-    if (Ticks < 1092) and (Ticks >= 1001) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
-    ;Temp for season: Fall
-    if (Ticks < 1183) and (Ticks >= 1092) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
-    ;Temp for season: Winter
-    if (Ticks < 1274) and (Ticks >= 1183) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
-    ;Temp for season: Spring
-    if (Ticks < 1365) and (Ticks >= 1274) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
-    ;Temp for season: Summer
-    if (Ticks < 1456) and (Ticks >= 1365) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
-    ;Temp for season: Fall
-    if (Ticks < 1547) and (Ticks >= 1456) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
-    ;Temp for season: Winter
-    if (Ticks < 1638) and (Ticks >= 1547) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
-    ;Temp for season: Spring
-    if (Ticks < 1729) and (Ticks >= 1638) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
-    ;Temp for season: Summer
-    if (Ticks < 1820) and (Ticks >= 1729) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
-    ;Temp for season: Fall
-    if (Ticks < 1911) and (Ticks >= 1820) [set Temp random-normal Fall_mean_temp Fall_temp_STDEV]
-    ;Temp for season: Winter
-    if (Ticks < 2002) and (Ticks >= 1911) [set Temp random-normal Winter_mean_temp Winter_temp_STDEV]
-    ;Temp for season: Spring
-    if (Ticks < 2093) and (Ticks >= 2002) [set Temp random-normal Spring_mean_temp Spring_temp_STDEV]
-    ;Temp for season: Summer
-    if (Ticks < 2184) and (Ticks >= 2093) [set Temp random-normal Summer_mean_temp Summer_temp_STDEV]
-    set PAR_Light random-normal 412.73276190717496 100.66482884736547
-    set Salinity random-normal Mean_Sal Sal_STDEV
-    set Sal Salinity
-    set Temperature Temp
-    if Strain = "KA32 - Nannochloropsis Oceanica" [
-      set Biomass_Growth abs Growth_biomass_KA32
-      set Lipid_Growth abs Growth_lipid_KA32
-      set Max_Lipid abs Max_Lipid_KA32
-      Set Max_Biomass abs Max_Biomass_KA32
-    ]
-    if Strain = "LRB-AZ-1201 - Chlorella Vulgaris" [
-      set Biomass_Growth abs Growth_biomass_LRB-AZ-1201
-      set Lipid_Growth abs Growth_lipid_LRB-AZ-1201
-      set Max_Lipid abs Max_Lipid_LRB-AZ-1201
-      set Max_Biomass abs Max_Biomass_LRB-AZ-1201
-    ]
-    if Biomass > ((Max_biomass)*(Harvest_Point)) [set Lipid_Total ((2)*(Max_Lipid)/(3))]
-    if (Biomass > ((Max_biomass)*(Harvest_Point))) and starving = False [set Biomass ((2)*(Max_Biomass)/(3))]
-    set Lipid_Percent ((((Lipid_Total)* 100 /(Biomass))))
-    set Nitrogen_Consumption ((Biomass)/(7500))
-
-  ]
-  print Lipid_in - Lipid_eq
-  system-dynamics-go
-  set-current-plot "Enviroment"
-  system-dynamics-do-plot
-  set-current-plot "Nutrient_levels"
-  system-dynamics-do-plot
-  set-current-plot "Biomass Levels"
-  system-dynamics-do-plot
-  set-current-plot "Lipid Levels"
-  system-dynamics-do-plot
-  set-current-plot "Lipid Pecent"
-  system-dynamics-do-plot
-  set lipid_in2 lput Lipid_in lipid_in2
-end
-to output
-end
 @#$#@#$#@
 GRAPHICS-WINDOW
 0
@@ -589,8 +578,8 @@ true
 true
 "" ""
 PENS
-"PAR_Light" 1.0 0 -1184463 true "" "plot count PAR_Light"
-"mg/L-Nitrogen" 1.0 0 -10141563 true "" "plot count mg/L-Nitrogen"
+"PAR_Light" 1.0 0 -1184463 true "" ""
+"mg/L-Nitrogen" 1.0 0 -10141563 true "" ""
 
 PLOT
 980
@@ -608,7 +597,7 @@ true
 true
 "" ""
 PENS
-"Biomass" 1.0 0 -15575016 true "" "plot count Biomass"
+"Biomass" 1.0 0 -15575016 true "" ""
 
 SLIDER
 0
@@ -619,7 +608,7 @@ Temp
 Temp
 0
 100
-18.38116973371639
+15.18534131486054
 1
 1
 C
@@ -634,7 +623,7 @@ Salinity
 Salinity
 0
 100
-29.768806393224715
+31.482714805715673
 1
 1
 g/L
@@ -656,7 +645,7 @@ true
 true
 "" ""
 PENS
-"Lipid_Total" 1.0 0 -13840069 true "" "plot count Lipid_Total"
+"Lipid_Total" 1.0 0 -13840069 true "" ""
 
 SLIDER
 199
@@ -689,8 +678,8 @@ true
 true
 "" ""
 PENS
-"Sal" 1.0 0 -10899396 true "" "plot count Sal"
-"Temperature" 1.0 0 -2674135 true "" "plot count Temperature"
+"Sal" 1.0 0 -10899396 true "" ""
+"Temperature" 1.0 0 -2674135 true "" ""
 
 SLIDER
 0
@@ -981,7 +970,7 @@ true
 true
 "" ""
 PENS
-"Lipid_Percent" 1.0 0 -7500403 true "" "plot count Lipid_Percent"
+"Lipid_Percent" 1.0 0 -7500403 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -1380,13 +1369,12 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 1.0
-    org.nlogo.sdm.gui.AggregateDrawing 7
+    org.nlogo.sdm.gui.AggregateDrawing 6
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 37 330 30 30
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 35 290 30 30
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 35 246 30 30
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 31 197 30 30
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 618 815 30 30
-        org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 191 553 30 30
         org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 897 843 30 30
 @#$#@#$#@
 @#$#@#$#@
