@@ -1,4 +1,15 @@
 globals[Model_Nitrogen Model_Salinity Model_Temperature
+    ;; constants
+  Nitrogen_passthrough
+  ;; stock values
+  Biomass
+  Lipid
+  Lipid%
+  Nitrogen
+  Salinity
+  Temperature
+  ;; size of each step, see SYSTEM-DYNAMICS-GO
+  dt
 ]
 to Setup
   ca
@@ -19,6 +30,132 @@ to Start
   system-dynamics-do-plot
   set-current-plot "Lipid Levels"
   system-dynamics-do-plot
+end
+
+;; Initializes the system dynamics model.
+;; Call this in your model's SETUP procedure.
+to system-dynamics-setup
+  reset-ticks
+  set dt 1.0
+  ;; initialize constant values
+  set Nitrogen_passthrough (0)
+  ;; initialize stock values
+  set Biomass (1)
+  set Lipid (0)
+  set Lipid% (0)
+  set Nitrogen user-Nitrogen
+  set Salinity user-Salinity
+  set Temperature user-Temperature
+end
+
+;; Step through the system dynamics model by performing next iteration of Euler's method.
+;; Call this in your model's GO procedure.
+to system-dynamics-go
+
+  ;; compute variable and flow values once per step
+  let local-Salinity_Passthrough Salinity_Passthrough
+  let local-Temperature_passthrough Temperature_passthrough
+  let local-Biomass_for_calc Biomass_for_calc
+  let local-Lipid_for_calc Lipid_for_calc
+  let local-Biomass_passthrough Biomass_passthrough
+  let local-Lipid%_calc Lipid%_calc
+  let local-Biomass_Growth Biomass_Growth
+  let local-Lipid_Growth Lipid_Growth
+  let local-Nitrogen_Consumption Nitrogen_Consumption
+
+  ;; update stock values
+  ;; use temporary variables so order of computation doesn't affect result.
+  let new-Biomass max( list 0 ( Biomass + local-Biomass_Growth ) )
+  let new-Lipid max( list 0 ( Lipid + local-Lipid_Growth ) )
+  let new-Lipid% max( list 0 ( Lipid% ) )
+  let new-Nitrogen max( list 0 ( Nitrogen - local-Nitrogen_Consumption ) )
+  let new-Salinity max( list 0 ( Salinity ) )
+  let new-Temperature max( list 0 ( Temperature ) )
+  set Biomass new-Biomass
+  set Lipid new-Lipid
+  set Lipid% new-Lipid%
+  set Nitrogen new-Nitrogen
+  set Salinity new-Salinity
+  set Temperature new-Temperature
+
+  tick-advance dt
+end
+
+;; Report value of flow
+to-report Biomass_Growth
+  report ( ( (Nitrogen_passthrough / 3) + (Temperature_passthrough / 2) + ( Salinity_passthrough / 3) )
+  ) * dt
+end
+
+;; Report value of flow
+to-report Lipid_Growth
+  report ( ( ( Nitrogen_passthrough / 6) + ( Temperature_passthrough / 10) + ( Salinity_passthrough / 8) )
+  ) * dt
+end
+
+;; Report value of flow
+to-report Nitrogen_Consumption
+  report ( ( Biomass_Passthrough / 50)
+  ) * dt
+end
+
+;; Report value of variable
+to-report Salinity_Passthrough
+  report Salinity
+end
+
+;; Report value of variable
+to-report Temperature_passthrough
+  report Temperature
+end
+
+;; Report value of variable
+to-report Biomass_for_calc
+  report Biomass
+end
+
+;; Report value of variable
+to-report Lipid_for_calc
+  report Lipid
+end
+
+;; Report value of variable
+to-report Biomass_passthrough
+  report Biomass
+end
+
+;; Report value of variable
+to-report Lipid%_calc
+  report Lipid_for_calc * 100 / Biomass_for_calc
+end
+
+;; Plot the current state of the system dynamics model's stocks
+;; Call this procedure in your plot's update commands.
+to system-dynamics-do-plot
+  if plot-pen-exists? "Biomass" [
+    set-current-plot-pen "Biomass"
+    plotxy ticks Biomass
+  ]
+  if plot-pen-exists? "Lipid" [
+    set-current-plot-pen "Lipid"
+    plotxy ticks Lipid
+  ]
+  if plot-pen-exists? "Lipid%" [
+    set-current-plot-pen "Lipid%"
+    plotxy ticks Lipid%
+  ]
+  if plot-pen-exists? "Nitrogen" [
+    set-current-plot-pen "Nitrogen"
+    plotxy ticks Nitrogen
+  ]
+  if plot-pen-exists? "Salinity" [
+    set-current-plot-pen "Salinity"
+    plotxy ticks Salinity
+  ]
+  if plot-pen-exists? "Temperature" [
+    set-current-plot-pen "Temperature"
+    plotxy ticks Temperature
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -140,9 +277,9 @@ NIL
 1
 
 BUTTON
-153
+148
 43
-216
+211
 76
 Run
 Start
@@ -547,101 +684,8 @@ NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 1.0
-    org.nlogo.sdm.gui.AggregateDrawing 36
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 967 450 60 40
-            org.nlogo.sdm.gui.WrappedStock "Biomass" "(1)" 1
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 359 470 60 40
-            org.nlogo.sdm.gui.WrappedStock "Lipid" "(0)" 1
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 572 109 50 50
-            org.nlogo.sdm.gui.WrappedConverter "Salinity" "Salinity_Passthrough"
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 524 197 50 50
-            org.nlogo.sdm.gui.WrappedConverter "Temperature" "Temperature_passthrough"
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 958 752 50 50
-            org.nlogo.sdm.gui.WrappedConverter "Biomass" "Biomass_for_calc"
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 480 264 50 50
-            org.nlogo.sdm.gui.WrappedConverter "(0)" "Nitrogen_passthrough"
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 734 564 50 50
-            org.nlogo.sdm.gui.WrappedConverter "" ""
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 372 762 50 50
-            org.nlogo.sdm.gui.WrappedConverter "Lipid" "Lipid_for_calc"
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 1160 439 50 50
-            org.nlogo.sdm.gui.WrappedConverter "Biomass" "Biomass_passthrough"
-        org.nlogo.sdm.gui.ConverterFigure "attributes" "attributes" 1 "FillColor" "Color" 130 188 183 722 761 50 50
-            org.nlogo.sdm.gui.WrappedConverter "Lipid_for_calc * 100 / Biomass_for_calc" "Lipid%_calc"
-        org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 393 383 30 30
-        org.nlogo.sdm.gui.RateConnection 3 407 413 403 435 397 458 NULL NULL 0 0 0
-            org.jhotdraw.figures.ChopEllipseConnector REF 21
-            org.jhotdraw.standard.ChopBoxConnector REF 3
-            org.nlogo.sdm.gui.WrappedRate "( ( Nitrogen_passthrough / 6) + ( Temperature_passthrough / 10) + ( Salinity_passthrough / 8) )" "Lipid_Growth"
-                org.nlogo.sdm.gui.WrappedReservoir  REF 4 0
-        org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 901 452 30 30
-        org.nlogo.sdm.gui.RateConnection 3 931 468 943 468 955 468 NULL NULL 0 0 0
-            org.jhotdraw.figures.ChopEllipseConnector REF 27
-            org.jhotdraw.standard.ChopBoxConnector REF 1
-            org.nlogo.sdm.gui.WrappedRate "( (Nitrogen_passthrough / 3) + (Temperature_passthrough / 2) + ( Salinity_passthrough / 3) )" "Biomass_Growth"
-                org.nlogo.sdm.gui.WrappedReservoir  REF 2 0
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 731 569 60 40
-            org.nlogo.sdm.gui.WrappedStock "Lipid%" "(0)" 1
-        org.nlogo.sdm.gui.BindingConnection 2 389 522 396 762 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 3
-            org.jhotdraw.contrib.ChopDiamondConnector REF 15
-        org.nlogo.sdm.gui.BindingConnection 2 421 786 722 786 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 15
-            org.jhotdraw.contrib.ChopDiamondConnector REF 19
-        org.nlogo.sdm.gui.BindingConnection 2 995 502 984 753 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 1
-            org.jhotdraw.contrib.ChopDiamondConnector REF 9
-        org.nlogo.sdm.gui.BindingConnection 2 958 777 771 785 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 9
-            org.jhotdraw.contrib.ChopDiamondConnector REF 19
-        org.nlogo.sdm.gui.BindingConnection 2 748 762 757 612 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 19
-            org.jhotdraw.contrib.ChopDiamondConnector REF 13
-        org.nlogo.sdm.gui.BindingConnection 2 587 149 403 435 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 5
-            org.nlogo.sdm.gui.ChopRateConnector REF 22
-        org.nlogo.sdm.gui.BindingConnection 2 538 236 403 435 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 7
-            org.nlogo.sdm.gui.ChopRateConnector REF 22
-        org.nlogo.sdm.gui.BindingConnection 2 609 146 943 468 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 5
-            org.nlogo.sdm.gui.ChopRateConnector REF 28
-        org.nlogo.sdm.gui.BindingConnection 2 564 231 943 468 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 7
-            org.nlogo.sdm.gui.ChopRateConnector REF 28
-        org.nlogo.sdm.gui.BindingConnection 2 522 296 943 468 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 11
-            org.nlogo.sdm.gui.ChopRateConnector REF 28
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 777 262 60 40
-            org.nlogo.sdm.gui.WrappedStock "Nitrogen" "user-Nitrogen" 1
-        org.nlogo.sdm.gui.BindingConnection 2 765 282 529 288 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 65
-            org.jhotdraw.contrib.ChopDiamondConnector REF 11
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 780 189 60 40
-            org.nlogo.sdm.gui.WrappedStock "Temperature" "user-Temperature" 1
-        org.nlogo.sdm.gui.StockFigure "attributes" "attributes" 1 "FillColor" "Color" 225 225 182 780 108 60 40
-            org.nlogo.sdm.gui.WrappedStock "Salinity" "user-Salinity" 1
-        org.nlogo.sdm.gui.BindingConnection 2 768 211 572 220 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 70
-            org.jhotdraw.contrib.ChopDiamondConnector REF 7
-        org.nlogo.sdm.gui.BindingConnection 2 768 129 621 133 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 72
-            org.jhotdraw.contrib.ChopDiamondConnector REF 5
-        org.nlogo.sdm.gui.BindingConnection 2 494 303 403 435 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 11
-            org.nlogo.sdm.gui.ChopRateConnector REF 22
-        org.nlogo.sdm.gui.RateConnection 3 849 281 1190 280 1531 279 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 65
-            org.jhotdraw.figures.ChopEllipseConnector
-                org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1530 264 30 30
-            org.nlogo.sdm.gui.WrappedRate "Biomass_Passthrough / 50" "Nitrogen_Consuption" REF 66
-                org.nlogo.sdm.gui.WrappedReservoir  0   REF 86
-        org.nlogo.sdm.gui.BindingConnection 2 1039 468 1160 464 NULL NULL 0 0 0
-            org.jhotdraw.standard.ChopBoxConnector REF 1
-            org.jhotdraw.contrib.ChopDiamondConnector REF 17
-        org.nlogo.sdm.gui.BindingConnection 2 1185 439 1190 280 NULL NULL 0 0 0
-            org.jhotdraw.contrib.ChopDiamondConnector REF 17
-            org.nlogo.sdm.gui.ChopRateConnector REF 83
+    org.nlogo.sdm.gui.AggregateDrawing 1
+        org.nlogo.sdm.gui.ReservoirFigure "attributes" "attributes" 1 "FillColor" "Color" 192 192 192 1530 264 30 30
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
