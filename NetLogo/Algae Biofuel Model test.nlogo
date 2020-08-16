@@ -28,7 +28,7 @@ globals [has_Starved starving Starving_start_time Starving_end_time Resupplement
   dt
 ]
 
-to Setup
+to setup
   ca
   system-dynamics-setup
   set has_Starved False
@@ -507,7 +507,7 @@ BUTTON
 88
 318
 NIL
-Setup
+setup
 NIL
 1
 T
