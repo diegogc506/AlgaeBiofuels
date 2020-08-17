@@ -26,17 +26,20 @@ end
 
 to Start
   if Strain = "KA32 - Nannochloropsis Oceanica" [
-   set Lipid-Growth Lipid-Growth_KA32
-   set Biomass-Growth Biomass-Growth_KA32
-   set Lipid-Max Lipid-Max_KA32
-   set Biomass-Max Biomass-Max_KA32
+    set Lipid-Growth Lipid-Growth_KA32
+    set Biomass-Growth Biomass-Growth_KA32
+    set Lipid-Max Lipid-Max_KA32
+    set Biomass-Max Biomass-Max_KA32
+    set Nitrogen_Consumption Biomass / 1
   ]
   if Strain = "LRB-AZ-1201 - Chlorella Vulgaris"[
-   set Lipid-Growth Lipid-Growth_LRB
-   set Biomass-Growth Biomass-Growth_LRB
-   set Lipid-Max Lipid-Max_LRB
-   set Biomass-Max Biomass-Max_LRB
+    set Lipid-Growth Lipid-Growth_LRB
+    set Biomass-Growth Biomass-Growth_LRB
+    set Lipid-Max Lipid-Max_LRB
+    set Biomass-Max Biomass-Max_LRB
+    set Nitrogen_Consumption Biomass / 1
   ]
+  set Lipid% ((Lipid * 100)/(Biomass))
   system-dynamics-go
 end
 
@@ -78,6 +81,29 @@ to system-dynamics-go
   tick-advance dt
 end
 
+;; Report value of flow
+to-report Lipid-in
+  report ( Lipid-Growth
+  ) * dt
+end
+
+;; Report value of flow
+to-report Biomass-in
+  report ( Biomass-Growth
+  ) * dt
+end
+
+;; Report value of flow
+to-report Lipid-eq
+  report ( (Lipid-Growth)*(Lipid)/((Lipid-Max))
+  ) * dt
+end
+
+;; Report value of flow
+to-report Biomass-eq
+  report ( (Biomass-Growth)*(Biomass)/((Biomass-Max))
+  ) * dt
+end
 
 ;; Report value of flow
 to-report Nitrogen-Out
