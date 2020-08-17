@@ -204,6 +204,22 @@ to system-dynamics-do-plot
     set-current-plot-pen "Nitrogen_Consumption"
     plotxy ticks Nitrogen_Consumption
   ]
+  if plot-pen-exists? "Lipid-Growth" [
+    set-current-plot-pen "Lipid-Growth"
+    plotxy ticks Lipid-Growth
+  ]
+  if plot-pen-exists? "Biomass-Growth" [
+    set-current-plot-pen "Biomass-Growth"
+    plotxy ticks Biomass-Growth
+  ]
+  if plot-pen-exists? "Lipid-Max" [
+    set-current-plot-pen "Lipid-Max"
+    plotxy ticks Lipid-Max
+  ]
+  if plot-pen-exists? "Biomass-Max" [
+    set-current-plot-pen "Biomass-Max"
+    plotxy ticks Biomass-Max
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
