@@ -7,6 +7,14 @@ globals [
   Salinity-Const
   ;;stock values
   Nitrogen
+  Lipid
+  Biomass
+  Lipid%
+  Nitrogen_Consumption
+  Lipid-Growth
+  Biomass-Growth
+  Lipid-Max
+  Biomass-Max
   ;; size of each step, see SYSTEM-DYNAMICS-GO
   dt
 ]
@@ -17,7 +25,18 @@ to Setup
 end
 
 to Start
-
+  if Strain = "KA32 - Nannochloropsis Oceanica" [
+   set Lipid-Growth Lipid-Growth_KA32
+   set Biomass-Growth Biomass-Growth_KA32
+   set Lipid-Max Lipid-Max_KA32
+   set Biomass-Max Biomass-Max_KA32
+  ]
+  if Strain = "LRB-AZ-1201 - Chlorella Vulgaris"[
+   set Lipid-Growth Lipid-Growth_LRB
+   set Biomass-Growth Biomass-Growth_LRB
+   set Lipid-Max Lipid-Max_LRB
+   set Biomass-Max Biomass-Max_LRB
+  ]
   system-dynamics-go
 end
 
@@ -32,7 +51,14 @@ to system-dynamics-setup
   set Salinity-Const Salinity
   ;; initialize stock values
   set Nitrogen Initial-Nitrogen
-
+  set Lipid 0
+  set Biomass 1
+  set Lipid% 0
+  set Nitrogen_Consumption 0
+  set Lipid-Growth 0
+  set Biomass-Growth 0
+  set Lipid-Max 0
+  set Biomass-Max 0
 end
 
 
@@ -52,12 +78,76 @@ to system-dynamics-go
   tick-advance dt
 end
 
+
+;; Report value of flow
+to-report Nitrogen-Out
+  report ( Nitrogen_Consumption
+    ) * dt
+end
+
+;; Report value of variable
+to-report Lipid-Growth_KA32
+  report 0
+end
+
+;; Report value of variable
+to-report Lipid-Growth_LRB
+  report 0
+end
+
+;; Report value of variable
+to-report Biomass-Growth_KA32
+  report 0
+end
+
+;; Report value of variable
+to-report Biomass-Growth_LRB
+  report 0
+end
+
+;; Report value of variable
+to-report Lipid-Max_KA32
+  report 0
+end
+
+;; Report value of variable
+to-report Lipid-Max_LRB
+  report 0
+end
+
+;; Report value of variable
+to-report Biomass-Max_KA32
+  report 0
+end
+
+;; Report value of variable
+to-report Biomass-Max_LRB
+  report 0
+end
+
+
 ;; Plot the current state of the system dynamics model's stocks
 ;; Call this procedure in your plot's update commands.
 to system-dynamics-do-plot
   if plot-pen-exists? "Nitrogen" [
    set-current-plot-pen "Nitrogen"
    plotxy ticks Nitrogen
+  ]
+  if plot-pen-exists? "Lipid" [
+   set-current-plot-pen "Lipid"
+   plotxy ticks Lipid
+  ]
+  if plot-pen-exists? "Biomass" [
+   set-current-plot-pen "Biomass"
+   plotxy ticks Biomass
+  ]
+  if plot-pen-exists? "Lipid%" [
+   set-current-plot-pen "Lipid%"
+   plotxy ticks Lipid%
+  ]
+  if plot-pen-exists? "Nitrogen_Consumption" [
+    set-current-plot-pen "Nitrogen_Consumption"
+    plotxy ticks Nitrogen_Consumption
   ]
 end
 @#$#@#$#@
