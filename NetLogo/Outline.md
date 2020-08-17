@@ -18,12 +18,12 @@ Plan for Raceway_Model:
 		• ?
 		• ?
 	• n Graphs:
-		• Lipids as Lipid Levels
 		• Biomass as Biomass Levels
 		• FAME% as Lipid%
-		• Temperature and Salinity as Enviroment
-		• Light as Light Levels
-		• Nitrogen as Nitrogen Levels
+			• Temperature and Salinity as Enviroment
+			• Light as Light Levels
+			• Nitrogen as Nitrogen Levels
+		•Last 3 could be combined as possible
 	•
 	
 Plan for Lab_Sim_Model:
@@ -40,7 +40,6 @@ Plan for Lab_Sim_Model:
 		• 
 		• 
 	• n Graphs:
-		• Lipids as Lipid Levels
 		• Biomass as Biomass Levels
 		• FAME% as Lipid%
 		• Nitrogen as Nitrogen Levels
