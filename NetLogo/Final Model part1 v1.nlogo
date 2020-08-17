@@ -3,8 +3,8 @@ globals [
 
   ;;constants
   PAR
-  Temperature-Const
-  Salinity-Const
+  Temperature-Celcius
+  Salinity-g/L
   ;;stock values
   Nitrogen
   Lipid
@@ -25,6 +25,7 @@ to Setup
 end
 
 to Start
+  if Nitrogen = 0 [stop]
   if Strain = "KA32 - Nannochloropsis Oceanica" [
     set Lipid-Growth Lipid-Growth_KA32
     set Biomass-Growth Biomass-Growth_KA32
@@ -41,6 +42,14 @@ to Start
   ]
   set Lipid% ((Lipid * 100)/(Biomass))
   system-dynamics-go
+  set-current-plot "Photosynthetically Active Radiation"
+  system-dynamics-do-plot
+  set-current-plot "Environment"
+  system-dynamics-do-plot
+  set-current-plot "Photosynthetically Active Radiation"
+  system-dynamics-do-plot
+  set-current-plot "Photosynthetically Active Radiation"
+  system-dynamics-do-plot
 end
 
 ;; Initializes the system dynamics model.
@@ -50,11 +59,11 @@ to system-dynamics-setup
   set dt 1.0
   ;; initialize constant values
   set PAR Photosynthetically-Active-Radiation
-  set Temperature-Const Temperature
-  set Salinity-Const Salinity
+  set Temperature-Celcius Temperature
+  set Salinity-g/L Salinity
   ;; initialize stock values
   set Nitrogen Initial-Nitrogen
-  set Lipid 0
+  set Lipid 1
   set Biomass 1
   set Lipid% 0
   set Nitrogen_Consumption 0
@@ -142,42 +151,42 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth_KA32
-  report 0
+  report 1
 end
 
 ;; Report value of variable
 to-report Lipid-Growth_LRB
-  report 0
+  report 1
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_KA32
-  report 0
+  report 1
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_LRB
-  report 0
+  report 1
 end
 
 ;; Report value of variable
 to-report Lipid-Max_KA32
-  report 0
+  report 100
 end
 
 ;; Report value of variable
 to-report Lipid-Max_LRB
-  report 0
+  report 100
 end
 
 ;; Report value of variable
 to-report Biomass-Max_KA32
-  report 0
+  report 100
 end
 
 ;; Report value of variable
 to-report Biomass-Max_LRB
-  report 0
+  report 100
 end
 
 
@@ -219,6 +228,14 @@ to system-dynamics-do-plot
   if plot-pen-exists? "Biomass-Max" [
     set-current-plot-pen "Biomass-Max"
     plotxy ticks Biomass-Max
+  ]
+    if plot-pen-exists? "Temperature-Celcius" [
+    set-current-plot-pen "Temperature-Celcius"
+    plotxy ticks Temperature-Celcius
+  ]
+    if plot-pen-exists? "Salinity-g/L" [
+    set-current-plot-pen "Salinity-g/L"
+    plotxy ticks Salinity-g/L
   ]
 end
 @#$#@#$#@
@@ -265,10 +282,10 @@ umol/(m*m*s)
 HORIZONTAL
 
 BUTTON
-117
-99
-181
-132
+123
+141
+187
+174
 NIL
 Setup
 NIL
@@ -282,10 +299,10 @@ NIL
 1
 
 BUTTON
-236
-94
-299
-127
+191
+142
+254
+175
 NIL
 Start
 T
@@ -317,7 +334,7 @@ Initial-Nitrogen
 Initial-Nitrogen
 1000
 4000
-2500.0
+1000.0
 1
 1
 mg/L
@@ -352,6 +369,79 @@ Salinity
 1
 g/L
 HORIZONTAL
+
+PLOT
+634
+121
+1066
+458
+Photosynthetically Active Radiation
+Time
+umol/(m*m*s)
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"PAR" 1.0 0 -4079321 true "" ""
+
+PLOT
+636
+471
+1070
+756
+Environment
+Time
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Temperature-Celcius" 1.0 0 -2674135 true "" ""
+"Salinity-g/L" 1.0 0 -13345367 true "" ""
+
+PLOT
+100
+400
+473
+718
+Lipid Levels
+Time
+%
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Lipid%" 1.0 0 -11085214 true "" ""
+
+PLOT
+1113
+148
+1485
+464
+Biomass
+Time
+mg
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Biomass" 1.0 0 -8732573 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?
