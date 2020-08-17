@@ -1,4 +1,65 @@
+globals [
+  ;;other needed varivables
 
+  ;;constants
+  PAR
+  Temperature-Const
+  Salinity-Const
+  ;;stock values
+  Nitrogen
+  ;; size of each step, see SYSTEM-DYNAMICS-GO
+  dt
+]
+
+to Setup
+  ca
+  system-dynamics-setup
+end
+
+to Start
+
+  system-dynamics-go
+end
+
+;; Initializes the system dynamics model.
+;; Call this in your model's SETUP procedure.
+to system-dynamics-setup
+  reset-ticks
+  set dt 1.0
+  ;; initialize constant values
+  set PAR Photosynthetically-Active-Radiation
+  set Temperature-Const Temperature
+  set Salinity-Const Salinity
+  ;; initialize stock values
+  set Nitrogen Initial-Nitrogen
+
+end
+
+
+;; Step through the system dynamics model by performing next iteration of Euler's method.
+;; Call this in your model's GO procedure.
+to system-dynamics-go
+;; compute variable and flow values once per step
+;  let
+;  let
+
+  ;; update stock values
+  ;; use temporary variables so order of computation doesn't affect result.
+;  let new-test11 max( list 0 ( test11 + local-test3 ) )
+;  set test11 new-test11
+;
+
+  tick-advance dt
+end
+
+;; Plot the current state of the system dynamics model's stocks
+;; Call this procedure in your plot's update commands.
+to system-dynamics-do-plot
+  if plot-pen-exists? "Nitrogen" [
+   set-current-plot-pen "Nitrogen"
+   plotxy ticks Nitrogen
+  ]
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 0
@@ -26,6 +87,110 @@ GRAPHICS-WINDOW
 0
 ticks
 3.0
+
+SLIDER
+127
+322
+454
+355
+Photosynthetically-Active-Radiation
+Photosynthetically-Active-Radiation
+0
+914
+418.0
+1
+1
+umol/(m*m*s)
+HORIZONTAL
+
+BUTTON
+117
+99
+181
+132
+NIL
+Setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+236
+94
+299
+127
+NIL
+Start
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+CHOOSER
+125
+175
+358
+220
+Strain
+Strain
+"KA32 - Nannochloropsis Oceanica" "LRB-AZ-1201 - Chlorella Vulgaris"
+0
+
+SLIDER
+126
+220
+298
+253
+Initial-Nitrogen
+Initial-Nitrogen
+1000
+4000
+2500.0
+1
+1
+mg/L
+HORIZONTAL
+
+SLIDER
+128
+256
+300
+289
+Temperature
+Temperature
+10
+40
+25.0
+1
+1
+°C
+HORIZONTAL
+
+SLIDER
+127
+288
+299
+321
+Salinity
+Salinity
+0
+50
+26.0
+1
+1
+g/L
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
