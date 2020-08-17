@@ -183,7 +183,6 @@ to Start
     set Nitrogen_Consumption ((Biomass)/(7500))
 
   ]
-  print Lipid_in - Lipid_eq
   system-dynamics-go
   set-current-plot "Enviroment"
   system-dynamics-do-plot
