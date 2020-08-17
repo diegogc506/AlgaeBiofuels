@@ -46,9 +46,9 @@ to Start
   system-dynamics-do-plot
   set-current-plot "Environment"
   system-dynamics-do-plot
-  set-current-plot "Photosynthetically Active Radiation"
+  set-current-plot "Lipid Levels"
   system-dynamics-do-plot
-  set-current-plot "Photosynthetically Active Radiation"
+  set-current-plot "Biomass Levels"
   system-dynamics-do-plot
 end
 
@@ -151,32 +151,32 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth_KA32
-  report 1
+  report .01
 end
 
 ;; Report value of variable
 to-report Lipid-Growth_LRB
-  report 1
+  report .01
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_KA32
-  report 1
+  report 10
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_LRB
-  report 1
+  report 10
 end
 
 ;; Report value of variable
 to-report Lipid-Max_KA32
-  report 100
+  report 40
 end
 
 ;; Report value of variable
 to-report Lipid-Max_LRB
-  report 100
+  report 6
 end
 
 ;; Report value of variable
@@ -430,7 +430,7 @@ PLOT
 148
 1485
 464
-Biomass
+Biomass Levels
 Time
 mg
 0.0
