@@ -32,7 +32,7 @@ to Start
     set Biomass-Max Biomass-Max_KA32
     set Nitrogen_Consumption Biomass / 1
   ]
-  if Strain = "LRB-AZ-1201 - Chlorella Vulgaris"[
+  if Strain = "LRB-AZ-1201 - Chlorella Vulgaris" [
     set Lipid-Growth Lipid-Growth_LRB
     set Biomass-Growth Biomass-Growth_LRB
     set Lipid-Max Lipid-Max_LRB
@@ -68,13 +68,42 @@ end
 ;; Step through the system dynamics model by performing next iteration of Euler's method.
 ;; Call this in your model's GO procedure.
 to system-dynamics-go
-;; compute variable and flow values once per step
-;  let
+  ;; compute variable and flow values once per step
+  let local-Lipid-Growth_KA32 Lipid-Growth_KA32
+  let local-Biomass-Growth_KA32 Biomass-Growth_KA32
+  let local-Biomass-Growth_LRB-AZ-1201 Biomass-Growth_LRB
+  let local-Lipid-Growth_LRB Lipid-Growth_LRB
+  let local-Lipid-Max_LRB Lipid-Max_LRB
+  let local-Lipid-Max_KA32 Lipid-Max_KA32
+  let local-Biomass-Max_KA32 Biomass-Max_KA32
+  let local-Biomass-Max_LRB Biomass-Max_LRB
+  let local-Lipid-in Lipid-in
+  let local-Lipid-eq Lipid-eq
+  let local-Biomass-in Biomass-in
+  let local-Biomass-eq Biomass-eq
+  let local-Nitrogen-out Nitrogen-out
 ;  let
 
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
-;  let new-test11 max( list 0 ( test11 + local-test3 ) )
+  let new-Biomass max( list 0 ( Biomass + local-Biomass-in - local-Biomass-eq ) )
+  let new-Lipid max( list 0 ( Lipid + local-Lipid-in - local-Lipid-eq ) )
+  let new-Nitrogen max( list 0 ( Nitrogen - local-Nitrogen-out ) )
+  let new-Nitrogen_Consumption max( list 0 ( Nitrogen_Consumption ) )
+  let new-Lipid% max( list 0 ( Lipid% ) )
+  let new-Lipid-Growth max( list 0 (Lipid-Growth) )
+  let new-Biomass-Growth max( list 0 (Biomass-Growth) )
+  let new-Lipid-Max max( list 0 (Lipid-Max) )
+  let new-Biomass-Max max( list 0 (Biomass-Max) )
+  set Nitrogen new-Nitrogen
+  set Lipid new-lipid
+  set Biomass new-Biomass
+  set Lipid% new-Lipid%
+  set Nitrogen_Consumption new-Nitrogen_Consumption
+  set Lipid-Growth new-Lipid-Growth
+  set Biomass-Growth new-Biomass-Growth
+  set Lipid-Max new-Lipid-Max
+  set Biomass-Max new-Biomass-Max
 ;  set test11 new-test11
 ;
 
