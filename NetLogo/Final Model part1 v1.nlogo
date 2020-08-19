@@ -63,7 +63,7 @@ to system-dynamics-setup
   set Salinity-g/L Salinity
   ;; initialize stock values
   set Nitrogen Initial-Nitrogen
-  set Lipid 1
+  set Lipid 0
   set Biomass 1
   set Lipid% 0
   set Nitrogen_Consumption 0
@@ -151,7 +151,7 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth_KA32
-  report .01
+  report ((1000)*(1 - exp (-((1.7)*(PAR)/(1000)))) * (exp (-((1.7)*(PAR)/(1000))))/(250))
 end
 
 ;; Report value of variable
@@ -237,16 +237,20 @@ to system-dynamics-do-plot
     set-current-plot-pen "Salinity-g/L"
     plotxy ticks Salinity-g/L
   ]
+    if plot-pen-exists? "PAR" [
+    set-current-plot-pen "PAR"
+    plotxy ticks PAR
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
 0
 10
-8
-19
+33
+44
 -1
 -1
-0.0
+25.0
 1
 0
 1
@@ -267,15 +271,15 @@ ticks
 3.0
 
 SLIDER
-127
+129
 322
-454
+588
 355
 Photosynthetically-Active-Radiation
 Photosynthetically-Active-Radiation
 0
-914
-418.0
+3000
+405.0
 1
 1
 umol/(m*m*s)
