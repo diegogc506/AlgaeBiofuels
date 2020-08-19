@@ -31,16 +31,16 @@ to Start
     set Biomass-Growth Biomass-Growth_KA32
     set Lipid-Max Lipid-Max_KA32
     set Biomass-Max Biomass-Max_KA32
-    set Nitrogen_Consumption Biomass / 1
+    set Nitrogen_Consumption Biomass / 1000
   ]
   if Strain = "LRB-AZ-1201 - Chlorella Vulgaris" [
     set Lipid-Growth Lipid-Growth_LRB
     set Biomass-Growth Biomass-Growth_LRB
     set Lipid-Max Lipid-Max_LRB
     set Biomass-Max Biomass-Max_LRB
-    set Nitrogen_Consumption Biomass / 1
+    set Nitrogen_Consumption Biomass / 1000
   ]
-  set Lipid% ((Lipid * 100)/(Biomass))
+  set Lipid% ((Lipid * 100)/( Biomass ))
   system-dynamics-go
   set-current-plot "Photosynthetically Active Radiation"
   system-dynamics-do-plot
@@ -49,6 +49,8 @@ to Start
   set-current-plot "Lipid Levels"
   system-dynamics-do-plot
   set-current-plot "Biomass Levels"
+  system-dynamics-do-plot
+  set-current-plot "Nitrogen Levels"
   system-dynamics-do-plot
 end
 
@@ -95,7 +97,7 @@ to system-dynamics-go
 
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
-  let new-Biomass max( list 0 ( Biomass + local-Biomass-in - local-Biomass-eq ) )
+  let new-Biomass max( list 1 ( Biomass + local-Biomass-in - local-Biomass-eq ) )
   let new-Lipid max( list 0 ( Lipid + local-Lipid-in - local-Lipid-eq ) )
   let new-Nitrogen max( list 0 ( Nitrogen - local-Nitrogen-out ) )
   let new-Nitrogen_Consumption max( list 0 ( Nitrogen_Consumption ) )
@@ -151,42 +153,42 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth_KA32
-  report ((1000)*(1 - exp (-((1.7)*(PAR)/(1000)))) * (exp (-((1.7)*(PAR)/(1000))))/(250))
+  report (((1000)*(1 - exp (-((1.7)*(PAR)/(1000)))) * (exp (-((1.7)*(PAR)/(1000))))/(250) * ( 14615.915654786271 + ( -338.0369550346547  * Salinity-g/L ))) / 8)
 end
 
 ;; Report value of variable
 to-report Lipid-Growth_LRB
-  report .01
+  report ((1000)*(1 - exp (-((1.7)*(PAR)/(1000)))) * (exp (-((1.7)*(PAR)/(1000))))/(250) * ( 1553.5065126707082 + ( -232.8667470832933 * Salinity-g/L )))
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_KA32
-  report 10
+  report  abs ( 443.439705 + ( ( -4.60349344 * Salinity-g/L ) + ( -0.502077115 * Nitrogen )))
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_LRB
-  report 10
+  report abs ( 204.045481 + ( ( 4.80473562 * Salinity-g/L ) + ( 0.229128054 * Nitrogen )))
 end
 
 ;; Report value of variable
 to-report Lipid-Max_KA32
-  report 40
+  report 20000
 end
 
 ;; Report value of variable
 to-report Lipid-Max_LRB
-  report 6
+  report 3000
 end
 
 ;; Report value of variable
 to-report Biomass-Max_KA32
-  report 100
+  report 1000000000000
 end
 
 ;; Report value of variable
 to-report Biomass-Max_LRB
-  report 100
+  report 1000000000000
 end
 
 
@@ -338,7 +340,7 @@ Initial-Nitrogen
 Initial-Nitrogen
 1000
 4000
-1000.0
+4000.0
 1
 1
 mg/L
@@ -412,10 +414,10 @@ PENS
 "Salinity-g/L" 1.0 0 -13345367 true "" ""
 
 PLOT
-100
-400
-473
-718
+1070
+439
+1443
+757
 Lipid Levels
 Time
 %
@@ -430,10 +432,10 @@ PENS
 "Lipid%" 1.0 0 -11085214 true "" ""
 
 PLOT
-1113
-148
-1485
-464
+1076
+123
+1448
+439
 Biomass Levels
 Time
 mg
@@ -446,6 +448,24 @@ true
 "" ""
 PENS
 "Biomass" 1.0 0 -8732573 true "" ""
+
+PLOT
+101
+386
+611
+783
+Nitrogen Levels
+Time
+mg/L
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Nitrogen" 1.0 0 -10141563 true "" ""
 
 @#$#@#$#@
 ## WHAT IS IT?
