@@ -44,7 +44,7 @@ to Start
       set Lipid-Growth Lipid-Growth-Starve
       set Biomass-Growth Biomass-Growth-Starve
       if Ticks = starvation-end [
-        set Nitrogen 10
+        set Nitrogen Initial-Supplementation-Nitrogen
         set phase "supplementation"
       ]
     ]
@@ -92,7 +92,7 @@ to system-dynamics-go
   let local-Biomass-Growth-Starve Biomass-Growth-Starve
   let local-Biomass-Growth-Supplementation Biomass-Growth-Supplementation
   let local-Biomass-in Biomass-in
-  let local-Lipid-in Biomass-in
+  let local-Lipid-in Lipid-in
   let local-Nitrogen-out Nitrogen-out
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
@@ -131,17 +131,17 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth-Replete
-  report 0.01
+  report 1
 end
 
 ;; Report value of variable
 to-report Lipid-Growth-Starve
-  report 10
+  report 2.5
 end
 
 ;; Report value of variable
 to-report Lipid-Growth-Supplementation
-  report -1
+  report -0.5
 end
 
 ;; Report value of variable
@@ -253,7 +253,7 @@ Starvation-Trigger-Amount
 Starvation-Trigger-Amount
 0
 100
-50.0
+22.0
 1
 1
 NIL
@@ -338,7 +338,7 @@ true
 true
 "" ""
 PENS
-"Lipid" 1.0 0 -14439633 true "" ""
+"Lipid%" 1.0 0 -14439633 true "" ""
 
 PLOT
 194
@@ -367,10 +367,25 @@ Starvation-Length
 Starvation-Length
 0
 48
-48.0
+18.0
 1
 1
 Hours
+HORIZONTAL
+
+SLIDER
+159
+126
+429
+159
+Initial-Supplementation-Nitrogen
+Initial-Supplementation-Nitrogen
+0
+10
+5.0
+.25
+1
+mg/L
 HORIZONTAL
 
 @#$#@#$#@
