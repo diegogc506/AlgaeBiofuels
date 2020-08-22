@@ -58,6 +58,12 @@ to Start
     if Nitrogen = 0 [Stop]
   ]
   system-dynamics-go
+  set-current-plot "Lipid Level"
+  system-dynamics-do-plot
+  set-current-plot "Biomass Level"
+  system-dynamics-do-plot
+  set-current-plot "Nitrogen Level"
+  system-dynamics-do-plot
 end
 
 ;; Initializes the system dynamics model.
@@ -242,7 +248,7 @@ PLOT
 134
 880
 413
-Lipid%
+Lipid Level
 Hours
 %
 0.0
