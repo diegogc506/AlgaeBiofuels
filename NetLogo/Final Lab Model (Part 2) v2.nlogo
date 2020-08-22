@@ -55,7 +55,8 @@ to Start
     set Lipid-Growth Lipid-Growth-Starve
     set Biomass-Growth Biomass-Growth-Starve
         if Ticks = starvation-end [
-     set phase "supplementation"
+      set Nitrogen 10
+      set phase "supplementation"
     ]
   ]
   if phase = "supplementation" [
@@ -63,6 +64,7 @@ to Start
     set Biomass-Growth Biomass-Growth-Supplementation
     if Nitrogen = 0 [Stop]
   ]
+  set Nitrogen_Consumption Biomass / 1000
   set Lipid% ((Lipid * 100)/( Biomass ))
   system-dynamics-go
   set-current-plot "Lipid Level"
@@ -102,20 +104,29 @@ to system-dynamics-go
   let local-Biomass-Growth-Supplementation Biomass-Growth-Supplementation
   let local-Biomass-in Biomass-in
   let local-Lipid-in Biomass-in
+  let local-Nitrogen-out Nitrogen-out
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
   let new-Biomass max( list 1 ( Biomass + local-Biomass-in) )
-  let new-Lipid max( list 0 ( Lipid + local-Lipid-in) )
+  let new-Lipid ( Lipid + local-Lipid-in )
   let new-Lipid% max( list 0 ( Lipid% ) )
+  let new-Nitrogen_Consumption max( list 0 ( Nitrogen_Consumption ) )
+  let new-Nitrogen max( list 0 ( Nitrogen - local-Nitrogen-out ) )
   set Lipid new-lipid
   set Biomass new-Biomass
   set Lipid% new-Lipid%
-
+  set Nitrogen_Consumption new-Nitrogen_Consumption
+  set Nitrogen new-Nitrogen
 
 
   tick-advance dt
 end
 
+;; Report value of flow
+to-report Nitrogen-Out
+  report ( Nitrogen_Consumption
+    ) * dt
+end
 
 ;; Report value of flow
 to-report Lipid-in
@@ -131,7 +142,7 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth-Replete
-  report 1
+  report .1
 end
 
 ;; Report value of variable
@@ -141,7 +152,7 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth-Supplementation
-  report 1
+  report -1
 end
 
 ;; Report value of variable
@@ -162,7 +173,34 @@ end
 ;; Plot the current state of the system dynamics model's stocks
 ;; Call this procedure in your plot's update commands.
 to system-dynamics-do-plot
-
+  if plot-pen-exists? "Nitrogen" [
+   set-current-plot-pen "Nitrogen"
+   plotxy ticks Nitrogen
+  ]
+  if plot-pen-exists? "Lipid" [
+   set-current-plot-pen "Lipid"
+   plotxy ticks Lipid
+  ]
+  if plot-pen-exists? "Biomass" [
+   set-current-plot-pen "Biomass"
+   plotxy ticks Biomass
+  ]
+  if plot-pen-exists? "Lipid%" [
+   set-current-plot-pen "Lipid%"
+   plotxy ticks Lipid%
+  ]
+    if plot-pen-exists? "Nitrogen_Consumption" [
+    set-current-plot-pen "Nitrogen_Consumption"
+    plotxy ticks Nitrogen_Consumption
+  ]
+  if plot-pen-exists? "Lipid-Growth" [
+    set-current-plot-pen "Lipid-Growth"
+    plotxy ticks Lipid-Growth
+  ]
+  if plot-pen-exists? "Biomass-Growth" [
+    set-current-plot-pen "Biomass-Growth"
+    plotxy ticks Biomass-Growth
+  ]
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -201,7 +239,7 @@ Initial-Nitrogen
 Initial-Nitrogen
 0
 100
-0.0
+20.0
 1
 1
 mg/L
@@ -311,7 +349,7 @@ true
 true
 "" ""
 PENS
-"Lipid%" 1.0 0 -14439633 true "" ""
+"Lipid" 1.0 0 -14439633 true "" ""
 
 PLOT
 194
