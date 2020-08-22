@@ -40,6 +40,7 @@ end
 to Start
   if phase = "replete" [
     set Lipid-Growth Lipid-Growth-Replete
+    set Biomass-Growth Biomass-Growth-Replete
     (ifelse
       Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
         set phase "starvation"
@@ -52,12 +53,14 @@ to Start
   ]
   if phase = "starvation" [
     set Lipid-Growth Lipid-Growth-Starve
+    set Biomass-Growth Biomass-Growth-Starve
         if Ticks = starvation-end [
      set phase "supplementation"
     ]
   ]
   if phase = "supplementation" [
     set Lipid-Growth Lipid-Growth-Supplementation
+    set Biomass-Growth Biomass-Growth-Supplementation
     if Nitrogen = 0 [Stop]
   ]
   system-dynamics-go
@@ -101,13 +104,30 @@ end
 to-report Lipid-Growth-Replete
   report 1
 end
+
 ;; Report value of variable
 to-report Lipid-Growth-Starve
   report 10
 end
+
 ;; Report value of variable
 to-report Lipid-Growth-Supplementation
   report 1
+end
+
+;; Report value of variable
+to-report Biomass-Growth-Replete
+  report 10
+end
+
+;; Report value of variable
+to-report Biomass-Growth-Starve
+  report 1
+end
+
+;; Report value of variable
+to-report Biomass-Growth-Supplementation
+  report 10
 end
 
 ;; Plot the current state of the system dynamics model's stocks
