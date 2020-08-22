@@ -63,6 +63,7 @@ to Start
     set Biomass-Growth Biomass-Growth-Supplementation
     if Nitrogen = 0 [Stop]
   ]
+  set Lipid% ((Lipid * 100)/( Biomass ))
   system-dynamics-go
   set-current-plot "Lipid Level"
   system-dynamics-do-plot
@@ -99,12 +100,33 @@ to system-dynamics-go
   let local-Biomass-Growth-Replete Biomass-Growth-Replete
   let local-Biomass-Growth-Starve Biomass-Growth-Starve
   let local-Biomass-Growth-Supplementation Biomass-Growth-Supplementation
-  let local-Biomass-Growth Biomass-Growth
-  let local-Lipid-Growth Biomass-Growth
+  let local-Biomass-in Biomass-in
+  let local-Lipid-in Biomass-in
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
+  let new-Biomass max( list 1 ( Biomass + local-Biomass-in) )
+  let new-Lipid max( list 0 ( Lipid + local-Lipid-in) )
+  let new-Lipid% max( list 0 ( Lipid% ) )
+  set Lipid new-lipid
+  set Biomass new-Biomass
+  set Lipid% new-Lipid%
+
+
 
   tick-advance dt
+end
+
+
+;; Report value of flow
+to-report Lipid-in
+  report ( Lipid-Growth
+  ) * dt
+end
+
+;; Report value of flow
+to-report Biomass-in
+  report ( Biomass-Growth
+  ) * dt
 end
 
 ;; Report value of variable
