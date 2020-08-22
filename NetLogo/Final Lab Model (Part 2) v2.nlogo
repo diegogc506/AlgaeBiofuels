@@ -26,19 +26,8 @@ to Setup
   set starvation-end 100000
 end
 
-to test
-  (ifelse
-    Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
-      set phase "starve"
-    ]
-    Starvation-Trigger = "Time" and Ticks = Starvation-Trigger-Amount [
-     set phase "starve"
-    ]
-    )
-end
-
 to Start
-  if phase = "replete" [
+  (ifelse phase = "replete" [
     set Lipid-Growth Lipid-Growth-Replete
     set Biomass-Growth Biomass-Growth-Replete
     (ifelse
@@ -51,19 +40,19 @@ to Start
         set starvation-end Ticks + Starvation-Length
       ])
   ]
-  if phase = "starvation" [
-    set Lipid-Growth Lipid-Growth-Starve
-    set Biomass-Growth Biomass-Growth-Starve
-        if Ticks = starvation-end [
-      set Nitrogen 10
-      set phase "supplementation"
+    phase = "starvation" [
+      set Lipid-Growth Lipid-Growth-Starve
+      set Biomass-Growth Biomass-Growth-Starve
+      if Ticks = starvation-end [
+        set Nitrogen 10
+        set phase "supplementation"
+      ]
     ]
-  ]
-  if phase = "supplementation" [
-    set Lipid-Growth Lipid-Growth-Supplementation
-    set Biomass-Growth Biomass-Growth-Supplementation
-    if Nitrogen = 0 [Stop]
-  ]
+    phase = "supplementation" [
+      set Lipid-Growth Lipid-Growth-Supplementation
+      set Biomass-Growth Biomass-Growth-Supplementation
+      if Nitrogen = 0 [Stop]
+  ])
   set Nitrogen_Consumption Biomass / 1000
   set Lipid% ((Lipid * 100)/( Biomass ))
   system-dynamics-go
@@ -142,7 +131,7 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth-Replete
-  report .1
+  report 0.01
 end
 
 ;; Report value of variable
