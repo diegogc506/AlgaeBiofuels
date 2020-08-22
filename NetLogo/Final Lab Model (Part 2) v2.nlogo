@@ -1,6 +1,6 @@
 globals [
   ;;other needed varivables
-
+  phase
   ;;constants
   PAR
   Temperature-Celcius
@@ -13,8 +13,6 @@ globals [
   Nitrogen_Consumption
   Lipid-Growth
   Biomass-Growth
-  Lipid-Max
-  Biomass-Max
   ;; size of each step, see SYSTEM-DYNAMICS-GO
   dt
 ]
@@ -23,11 +21,24 @@ globals [
 to Setup
   ca
   system-dynamics-setup
+  set phase  "replete"
 end
 
 
 to Start
-
+  if phase = "replete" [
+    if false [
+     set phase "starve"
+    ]
+  ]
+  if phase = "starve" [
+        if false [
+     set phase "supplementation"
+    ]
+  ]
+  if phase = "supplementation" [
+    if Nitrogen = 0 [Stop]
+  ]
 end
 
 ;; Initializes the system dynamics model.
@@ -36,9 +47,7 @@ to system-dynamics-setup
   reset-ticks
   set dt 1.0
   ;; initialize constant values
-  set PAR Photosynthetically-Active-Radiation
-  set Temperature-Celcius Temperature
-  set Salinity-g/L Salinity
+
   ;; initialize stock values
   set Nitrogen Initial-Nitrogen
   set Lipid 0
@@ -47,8 +56,6 @@ to system-dynamics-setup
   set Nitrogen_Consumption 0
   set Lipid-Growth 0
   set Biomass-Growth 0
-  set Lipid-Max 0
-  set Biomass-Max 0
 end
 
 ;; Step through the system dynamics model by performing next iteration of Euler's method.
