@@ -10,6 +10,7 @@ Needed correlations for raceway model:
 			• Temperature
 			• Nitrogen
 			• Salinity
+		• Nitrogen consumption from Biomass Level
 	• LRB:
 		• Biomass: 
 			• PAR
@@ -21,3 +22,15 @@ Needed correlations for raceway model:
 			• Temperature
 			• Nitrogen
 			• Salinity
+		• Nitrogen consumption from Biomass Level
+
+Needed correlations forlab model:
+	•Biomass:
+		• Replete
+		• Starvation
+		• Resupplementation
+	•Lipid:
+		• Replete
+		• Starvation
+		• Resupplementation (maybe two parts, decrease then increase?)
+	• Nitrogen consumption from Biomass Level
