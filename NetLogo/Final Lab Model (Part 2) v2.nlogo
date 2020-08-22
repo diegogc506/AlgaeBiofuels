@@ -39,6 +39,7 @@ end
 
 to Start
   if phase = "replete" [
+    set Lipid-Growth Lipid-Growth-Replete
     (ifelse
       Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
         set phase "starvation"
@@ -50,11 +51,13 @@ to Start
       ])
   ]
   if phase = "starvation" [
+    set Lipid-Growth Lipid-Growth-Starve
         if Ticks = starvation-end [
      set phase "supplementation"
     ]
   ]
   if phase = "supplementation" [
+    set Lipid-Growth Lipid-Growth-Supplementation
     if Nitrogen = 0 [Stop]
   ]
   system-dynamics-go
