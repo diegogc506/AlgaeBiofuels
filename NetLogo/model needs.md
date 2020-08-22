@@ -1,0 +1,23 @@
+Needed correlations for raceway model:
+	• KA32:
+		• Biomass: 
+			• PAR
+			• Temperature
+			• Nitrogen
+			• Salinity
+		• Lipid:
+			• PAR
+			• Temperature
+			• Nitrogen
+			• Salinity
+	• LRB:
+		• Biomass: 
+			• PAR
+			• Temperature
+			• Nitrogen
+			• Salinity
+		• Lipid:
+			• PAR
+			• Temperature
+			• Nitrogen
+			• Salinity
