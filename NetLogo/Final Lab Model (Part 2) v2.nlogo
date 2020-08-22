@@ -1,6 +1,7 @@
 globals [
   ;;other needed varivables
   phase
+  starvation-end
   ;;constants
   PAR
   Temperature-Celcius
@@ -21,24 +22,42 @@ globals [
 to Setup
   ca
   system-dynamics-setup
-  set phase  "replete"
+  set phase "replete"
+  set starvation-end 100000
 end
 
+to test
+  (ifelse
+    Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
+      set phase "starve"
+    ]
+    Starvation-Trigger = "Time" and Ticks = Starvation-Trigger-Amount [
+     set phase "starve"
+    ]
+    )
+end
 
 to Start
   if phase = "replete" [
-    if false [
-     set phase "starve"
-    ]
+    (ifelse
+      Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
+        set phase "starvation"
+        set starvation-end Ticks + Starvation-Length
+      ]
+      Starvation-Trigger = "Time" and Ticks = Starvation-Trigger-Amount [
+        set phase "starvation"
+        set starvation-end Ticks + Starvation-Length
+      ])
   ]
-  if phase = "starve" [
-        if false [
+  if phase = "starvation" [
+        if Ticks = starvation-end [
      set phase "supplementation"
     ]
   ]
   if phase = "supplementation" [
     if Nitrogen = 0 [Stop]
   ]
+  system-dynamics-go
 end
 
 ;; Initializes the system dynamics model.
@@ -66,9 +85,21 @@ to system-dynamics-go
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
 
+  tick-advance dt
 end
 
-
+;; Report value of variable
+to-report Lipid-Growth-Replete
+  report 1
+end
+;; Report value of variable
+to-report Lipid-Growth-Starve
+  report 10
+end
+;; Report value of variable
+to-report Lipid-Growth-Supplementation
+  report 1
+end
 
 ;; Plot the current state of the system dynamics model's stocks
 ;; Call this procedure in your plot's update commands.
@@ -104,18 +135,157 @@ ticks
 30.0
 
 SLIDER
-106
-88
-312
-121
+187
+225
+393
+258
 Initial-Nitrogen
 Initial-Nitrogen
+0
+100
+0.0
+1
+1
+mg/L
+HORIZONTAL
+
+CHOOSER
+190
+263
+328
+308
+Starvation-Trigger
+Starvation-Trigger
+"Biomass" "Time"
+1
+
+SLIDER
+189
+313
+387
+346
+Starvation-Trigger-Amount
+Starvation-Trigger-Amount
 0
 100
 50.0
 1
 1
+NIL
+HORIZONTAL
+
+MONITOR
+336
+263
+438
+308
+NIL
+phase
+17
+1
+11
+
+BUTTON
+204
+173
+268
+206
+NIL
+Setup
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+BUTTON
+301
+171
+364
+204
+NIL
+Start
+T
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+PLOT
+522
+425
+854
+681
+Nitrogen Level
+Hours
 mg/L
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Nitrogen" 1.0 0 -10141563 true "" ""
+
+PLOT
+524
+134
+880
+413
+Lipid%
+Hours
+%
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Lipid%" 1.0 0 -14439633 true "" ""
+
+PLOT
+194
+433
+502
+679
+Biomass Level
+Hours
+Biomass
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"Biomass" 1.0 0 -12087248 true "" ""
+
+SLIDER
+226
+371
+412
+404
+Starvation-Length
+Starvation-Length
+0
+48
+48.0
+1
+1
+Hours
 HORIZONTAL
 
 @#$#@#$#@
