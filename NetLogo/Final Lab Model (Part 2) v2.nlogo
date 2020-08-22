@@ -93,7 +93,14 @@ end
 ;; Call this in your model's GO procedure.
 to system-dynamics-go
   ;; compute variable and flow values once per step
-
+  let local-Lipid-Growth-Replete Lipid-Growth-Replete
+  let local-Lipid-Growth-Starve Lipid-Growth-Starve
+  let local-Lipid-Growth-Supplementation Lipid-Growth-Supplementation
+  let local-Biomass-Growth-Replete Biomass-Growth-Replete
+  let local-Biomass-Growth-Starve Biomass-Growth-Starve
+  let local-Biomass-Growth-Supplementation Biomass-Growth-Supplementation
+  let local-Biomass-Growth Biomass-Growth
+  let local-Lipid-Growth Biomass-Growth
   ;; update stock values
   ;; use temporary variables so order of computation doesn't affect result.
 
