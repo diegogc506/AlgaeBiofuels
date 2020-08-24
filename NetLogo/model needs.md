@@ -1,3 +1,7 @@
+some of these may have been gotten already, but i don't have them anymore (lost the document where i was storing them),
+and i want to have a single file with all correlations listed in the final output, in case i ever need to fix issues with the model(s)
+
+
 Needed correlations for raceway model:
 	• KA32:
 		• Biomass: 
