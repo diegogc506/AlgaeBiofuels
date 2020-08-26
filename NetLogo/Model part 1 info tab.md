@@ -21,18 +21,23 @@ SETUP: Run this once you have set all the settings as described below, it resets
 
 There are Five inputs you can choose to manipulate:
 
-  - **The most important of these** is Strain.
+  - **The most important of these** is **_Strain_**.
 
     - If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
 
     - If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
 
-  - Salinity, used to set the salinity of the pond for the entire run
-	- assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run
+  - **_Salinity_**, used to set the salinity of the pond for the entire run, in g/L.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model
 
-   - user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
+  - **_Initial-Nitrogen_**, how much nitrogen is added to the pond at the beginning of the cultivation, in mg/L.
+   - Nitrogen is consumed at a rate proportional to the level of biomass, starting at the amount chosen by **_Initial-Nitrogen_**
 
-   - Harvest point, the point at when algae is harvested, in percent of maximum biomass, where 0 is 0% and 1 is 100%.
+  - **_Tempetature_**, the temperature of the water in the pond, in degrees Celcius.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model
+	
+  - **_Photosynthetically-Active-Radiation_**, the light level of the pond during cultivation, in umolm<sup>-2</sup>s<sup>-1</sup>
+
 
 
 ## THINGS TO NOTICE
