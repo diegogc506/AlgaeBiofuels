@@ -25,13 +25,13 @@ There are many inputs you can choose to manipulate:
 
 If **_OFF_** set the following values as you see fit, or leave to their defaults:
 
-   - **The most important of these** is Strain.
+  - **The most important of these** is Strain.
 
-   	- If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
+    - If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
 
-   	- If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
+    - If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
 
-   - Salinity, used to set the salinity of the pond for the entire run
+  - Salinity, used to set the salinity of the pond for the entire run
 	- assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run
 
    - user-mg/L-Nitrogen, how much nitrogen is added to the pond at the beginning of the cultivation.
