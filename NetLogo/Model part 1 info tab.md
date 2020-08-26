@@ -19,11 +19,7 @@ SETUP: Run this once you have set all the settings as described below, it resets
 
 **_START_**: Use this to run the model simulation. **_MAKE_ _SURE_ _TO_ _RUN_ _SETUP_ _FIRST_**, or the model will not run at all, as non-first attempts may function improperly on first run.
 
-There are many inputs you can choose to manipulate:
-
- 	- Starve for Lipid Production is the most important one.
-
-If **_OFF_** set the following values as you see fit, or leave to their defaults:
+There are Five inputs you can choose to manipulate:
 
   - **The most important of these** is Strain.
 
