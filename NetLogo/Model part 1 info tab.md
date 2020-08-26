@@ -15,15 +15,15 @@ The default option upon opening is to model for biomass growth, and has an optio
 
  Two main buttons are used to control the model:
 
-SETUP: Run this once you have set all the settings as described below, it resets all backend code and clears outputs. **BEFORE YOU RUN THIS, MAKE SURE TO SAVE ANY GRAPHS YOU WANT.**
+SETUP: Run this once you have set all the settings as described below, it resets all backend code and clears outputs. **_BEFORE_ _YOU_ _RUN_ _THIS,_ _MAKE SURE_ _TO_ _SAVE_ _ANY_ _GRAPHS _YOU_ _WANT_.**
 
-START: Use this to run the model simulation. **MAKE SURE TO RUN SETUP FIRST**, or the model will not run at all, as non-first attempts may function improperly on first run.
+**_START_**: Use this to run the model simulation. **_MAKE_ _SURE_ _TO_ _RUN_ _SETUP_ _FIRST_**, or the model will not run at all, as non-first attempts may function improperly on first run.
 
 There are many inputs you can choose to manipulate:
 
  	- Starve for Lipid Production is the most important one.
 
-If **OFF** set the following values as you see fit, or leave to their defaults:
+If **_OFF_** set the following values as you see fit, or leave to their defaults:
 
    - **The most important of these** is Strain.
 
