@@ -1,7 +1,6 @@
 ## WHAT IS IT?
 
 This model explores the growth of algae and the production of lipids for the eventual creation of green crude and/or biofuels based on certain environmental factors. 
-The default option upon opening is to model for biomass growth, and has an option where you can change it to model lipid production.
 
 ## HOW IT WORKS
  
@@ -15,7 +14,7 @@ The default option upon opening is to model for biomass growth, and has an optio
 
  Two main buttons are used to control the model:
 
-SETUP: Run this once you have set all the settings as described below, it resets all backend code and clears outputs. **_BEFORE_ _YOU_ _RUN_ _THIS,_ _MAKE SURE_ _TO_ _SAVE_ _ANY_ _GRAPHS_ _YOU_ _WANT_.**
+**_SETUP_**: Run this once you have set all the settings as described below, it resets all backend code and clears outputs. **_BEFORE_ _YOU_ _RUN_ _THIS,_ _MAKE SURE_ _TO_ _SAVE_ _ANY_ _GRAPHS_ _YOU_ _WANT_.**
 
 **_START_**: Use this to run the model simulation. **_MAKE_ _SURE_ _TO_ _RUN_ _SETUP_ _FIRST_**, or the model will not run at all, as non-first attempts may function improperly on first run.
 
