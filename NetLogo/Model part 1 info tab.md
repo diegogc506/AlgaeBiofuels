@@ -19,7 +19,7 @@ SETUP: Run this once you have set all the settings as described below, it resets
 
 **_START_**: Use this to run the model simulation. **_MAKE_ _SURE_ _TO_ _RUN_ _SETUP_ _FIRST_**, or the model will not run at all, as non-first attempts may function improperly on first run.
 
-There are Five inputs you can choose to manipulate:
+There are five inputs you can choose to manipulate:
 
   - **The most important of these** is **_Strain_**.
 
@@ -28,16 +28,16 @@ There are Five inputs you can choose to manipulate:
     - If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
 
   - **_Salinity_**, used to set the salinity of the pond for the entire run, in g/L.
-	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
 
   - **_Initial-Nitrogen_**, how much nitrogen is added to the pond at the beginning of the cultivation, in mg/L.
    - Nitrogen is consumed at a rate proportional to the level of biomass, starting at the amount chosen by **_Initial-Nitrogen_**.
 
-  - **_Tempetature_**, the temperature of the water in the pond, in degrees Celcius.
-	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+  - **_Temperature_**, the temperature of the water in the pond, in degrees Celcius.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
 	
   - **_Photosynthetically-Active-Radiation_**, the light level of the pond during cultivation, in umol*m<sup>-2</sup>s<sup>-1</sup>
-	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
 	- It is actually an 24 hour average, which is why we are assuming it will stay close to constant.
 
 
