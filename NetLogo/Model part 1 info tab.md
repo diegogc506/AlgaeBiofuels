@@ -28,16 +28,17 @@ There are Five inputs you can choose to manipulate:
     - If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
 
   - **_Salinity_**, used to set the salinity of the pond for the entire run, in g/L.
-	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model
+	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
 
   - **_Initial-Nitrogen_**, how much nitrogen is added to the pond at the beginning of the cultivation, in mg/L.
-   - Nitrogen is consumed at a rate proportional to the level of biomass, starting at the amount chosen by **_Initial-Nitrogen_**
+   - Nitrogen is consumed at a rate proportional to the level of biomass, starting at the amount chosen by **_Initial-Nitrogen_**.
 
   - **_Tempetature_**, the temperature of the water in the pond, in degrees Celcius.
-	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model
+	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
 	
   - **_Photosynthetically-Active-Radiation_**, the light level of the pond during cultivation, in umol*m<sup>-2</sup>s<sup>-1</sup>
-
+	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+	- It is actually an 24 hour average, which is why we are assuming it will stay close to constant.
 
 
 ## THINGS TO NOTICE
@@ -54,17 +55,15 @@ There are Five inputs you can choose to manipulate:
 
 ## EXTENDING THE MODEL
 
-- There are some extra lines of code, to make a list of values that can be exported at the end of the run with some code, make it to get values out
 - Figure out how to plot other variables, and plot ones that you think might be important
 
 ## NETLOGO FEATURES
 
 - The model uses large and stacked IF queries
-- The model relies heavily on stocks and Systems Dynamics
+- The model relies heavily on stocks and Systems Dynamics, rewritten by hand to allow it to work in NetLogo Web
 
 
 ## CREDITS AND REFERENCES
 
 [Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3) From [Kaggle](https://www.kaggle.com/)/[OpenEI](https://openei.org/wiki/ATP3_Data)/[NREL](https://data.nrel.gov/)
 [Kaggle Data Set was originally on NREL](https://data.nrel.gov/submissions/76) 
-[Lipid Starvation Model](https://baliga.systemsbiology.net/projects/green-algae-biofuels/): [Institute of Systems Biology](https://isbscience.org/) Data on How Different Nutrients Effect Lipid Production
