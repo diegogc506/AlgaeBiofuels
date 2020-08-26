@@ -324,7 +324,7 @@ NIL
 CHOOSER
 125
 175
-358
+372
 220
 Strain
 Strain
