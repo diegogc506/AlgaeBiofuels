@@ -36,7 +36,7 @@ There are Five inputs you can choose to manipulate:
   - **_Tempetature_**, the temperature of the water in the pond, in degrees Celcius.
 	- This is assumed to stay close to constant during the cultivation run, and as such, changeing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model
 	
-  - **_Photosynthetically-Active-Radiation_**, the light level of the pond during cultivation, in umolm<sup>-2</sup>s<sup>-1</sup>
+  - **_Photosynthetically-Active-Radiation_**, the light level of the pond during cultivation, in umol*m<sup>-2</sup>s<sup>-1</sup>
 
 
 
