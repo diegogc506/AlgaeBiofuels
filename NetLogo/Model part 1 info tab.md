@@ -1,16 +1,25 @@
 ## WHAT IS IT?
 
-This model explores the growth of algae and the production of lipids for the eventual creation of green crude and/or biofuels based on certain environmental. The default option upon opening is to model for biomass growth, and has an option where you can change it to model lipid production.
+This model explores the growth of algae and the production of lipids for the eventual creation of green crude and/or biofuels based on certain environmental factors. 
+The default option upon opening is to model for biomass growth, and has an option where you can change it to model lipid production.
 
 ## HOW IT WORKS
 
 There are two variations in the model:
 
-The first option, as mentioned before, models the accumulation of biomass in a raceway pond with a size 3.5 m by 1.5 m and 35 cm in depth (1025 L nominal volume at 25 cm working depth, with a surface area of 4.2 m<sup>2</sup> including the paddlewheel area), with a variety of factors that can be influenced by the user, with the algae strain being  KA32 - _Nannochloropsis Oceanica_ – Cellana, or LRB-AZ-1201 - _Chlorella Vulgaris_ - Arizona State University.
+
+The first option, as mentioned before,
+ 
+ 
+ The model models the accumulation of biomass in a raceway pond with a size 3.5 m by 1.5 m and 35 cm in depth (1025 L nominal volume at 25 cm working depth, with a surface area of 4.2 m<sup>2</sup> including the paddlewheel area), with a variety of factors that can be influenced by the user, with the algae strain being  KA32 - _Nannochloropsis_ _Oceanica_ – Cellana, or LRB-AZ-1201 - _Chlorella_ _Vulgaris_ - Arizona State University.
 
 The second option, also mentioned earlier, models the accumulation of lipids in algae based off of lab data during three phases of algae cultivation, Repletion, Starvation, and Resupplementation, and is less representative of a full scale solution, because the data used to produce this part of the model came from a laboratory testing. The algal strain used is _Chlamydomonas reinhardtii_ CC-1690. 
 
+
+
 Both options in the model uses a combination of custom code and NetLogo’s Systems Dynamics Modeler.
+
+
 
 
 ## HOW TO USE IT
