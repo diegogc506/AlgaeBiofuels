@@ -10,7 +10,7 @@ Needed correlations for raceway model:
 			• Nitrogen
 			• Salinity
 		• Lipid:
-			• PAR
+			• PAR -done
 			• Temperature
 			• Nitrogen
 			• Salinity
@@ -28,7 +28,7 @@ Needed correlations for raceway model:
 			• Salinity
 		• Nitrogen consumption from Biomass Level
 
-Needed correlations forlab model:
+Needed correlations for lab model:
 	•Biomass:
 		• Replete
 		• Starvation
