@@ -5,6 +5,7 @@ globals [
   PAR
   Temperature-Celcius
   Salinity-g/L
+  Temperature-Kelvin
   ;;stock values
   Nitrogen
   Lipid
@@ -63,6 +64,7 @@ to system-dynamics-setup
   set PAR Photosynthetically-Active-Radiation
   set Temperature-Celcius Temperature
   set Salinity-g/L Salinity
+  set Temperature-Kelvin Temperature + 237.15
   ;; initialize stock values
   set Nitrogen Initial-Nitrogen
   set Lipid 0
