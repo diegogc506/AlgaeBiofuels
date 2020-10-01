@@ -165,12 +165,12 @@ end
 
 ;; Report value of variable
 to-report Biomass-Growth_KA32
-  report  abs ( ( (  - (0.00000000000002301125 * (PAR)^ 7) + (0.00000000006532325 * (PAR)^ 6) - (0.0000000764855 * (PAR)^ 5) + (0.00004757025 * (PAR)^ 4) - (0.01682025 * (PAR)^ 3) + (3.344575 *(PAR)^ 2) - (339.1725 * (PAR)) + (13304.5) ) + ( (0.240875 * (Temperature-Celcius)^ 4) - (16.2975 * (Temperature-Celcius)^ 3) + (402.3125 * (Temperature-Celcius)^ 2) - (4273.225 * (Temperature-Celcius)) + (16676.75) ) + ( - (0.0002485625 * (Nitrogen)^ 4) + (0.0340505 * (Nitrogen)^ 3) - (1.476 * (Nitrogen)^ 2) + (19.95675 * (Nitrogen)) + (277.16) ) + ( - (0.1077275 * (Salinity-g/L)^ 6) + (19.9875 * (Salinity-g/L)^ 5) - (1541.6 * (Salinity-g/L)^ 4) + (63283.5 * (Salinity-g/L)^ 3) - (1457550 * (Salinity-g/L)^ 2) + (17855500 * (Salinity-g/L)) - (90958500) ) ) / 4)
+  report  abs ( ( (  - (0.00000000000002301125 * (PAR)^ 7) + (0.00000000006532325 * (PAR)^ 6) - (0.0000000764855 * (PAR)^ 5) + (0.00004757025 * (PAR)^ 4) - (0.01682025 * (PAR)^ 3) + (3.344575 *(PAR)^ 2) - (339.1725 * (PAR)) + (13304.5) ) + ( (0.240875 * (Temperature-Celcius)^ 4) - (16.2975 * (Temperature-Celcius)^ 3) + (402.3125 * (Temperature-Celcius)^ 2) - (4273.225 * (Temperature-Celcius)) + (16676.75) ) + ( - (0.0002485625 * (Nitrogen)^ 4) + (0.0340505 * (Nitrogen)^ 3) - (1.476 * (Nitrogen)^ 2) + (19.95675 * (Nitrogen)) + (277.16) ) + ( - (0.1077275 * (Salinity-g/L)^ 6) + (19.9875 * (Salinity-g/L)^ 5) - (1541.6 * (Salinity-g/L)^ 4) + (63283.5 * (Salinity-g/L)^ 3) - (1457550 * (Salinity-g/L)^ 2) + (17855500 * (Salinity-g/L)) - (90958500) ) ) / 16)
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_LRB
-  report abs ( ( ( ( - (0.000000000006822 * (PAR)^ 5) + (0.00000001324 * (PAR)^ 4) - (0.00000959 * (PAR)^ 3) + (0.003192 * (PAR)^ 2) - (0.4828 * (PAR)) + (32.69) ) + ( - (0.005419 * (Temperature-Celcius)^ 2) + (0.01781 * (Temperature-Celcius)) + (7.138) ) + ( - (0.001261 * (Nitrogen)^ 2)) + (0.129 * (Nitrogen)) + (2.949) ) + ( - (4.567 * (Salinity-g/L)^ 4) + (30.53 * (Salinity-g/L)^ 3) - (71.14 * (Salinity-g/L)^ 2) + (66.48 * (Salinity-g/L)) - (15.05) ) ) / 4)
+  report abs ( ( ( ( - (0.000000000006822 * (PAR)^ 5) + (0.00000001324 * (PAR)^ 4) - (0.00000959 * (PAR)^ 3) + (0.003192 * (PAR)^ 2) - (0.4828 * (PAR)) + (32.69) ) + ( - (0.005419 * (Temperature-Celcius)^ 2) + (0.01781 * (Temperature-Celcius)) + (7.138) ) + ( - (0.001261 * (Nitrogen)^ 2)) + (0.129 * (Nitrogen)) + (2.949) ) + ( - (4.567 * (Salinity-g/L)^ 4) + (30.53 * (Salinity-g/L)^ 3) - (71.14 * (Salinity-g/L)^ 2) + (66.48 * (Salinity-g/L)) - (15.05) ) ) / 16)
 end
 
 ;; Report value of variable
