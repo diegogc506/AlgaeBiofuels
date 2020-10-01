@@ -53,6 +53,7 @@ to Start
   system-dynamics-do-plot
   set-current-plot "Nitrogen Levels"
   system-dynamics-do-plot
+  print (Biomass-in - Biomass-eq)
 end
 
 ;; Initializes the system dynamics model.
@@ -160,17 +161,17 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth_LRB
-  report ( ( ( - (0.0000004484 * (PAR)^ 3) + (0.0007584 * (PAR)^ 2) - (0.2099 * (PAR)) + (226) ) + ( - (0.0399 * (Temperature-Celcius)^ 5) + (3.363 * (Temperature-Celcius)^ 4) - (111.5 * (Temperature-Celcius)^ 3) + (1820 * (Temperature-Celcius)^ 2) - (14630 * (Temperature-Celcius)) + (46670) ) + ( (0.002688 * (Nitrogen)^ 3) - (0.4502 * (Nitrogen)^ 2) + (24.37 * (Nitrogen) - (189.3) ) + ( - (28.49 * (Salinity-g/L)^ 2) + (133.2 * (Salinity-g/L)) + (130.7) ) ) / 4))
+  report ( ( ( - (0.0000004484 * (PAR)^ 3) + (0.0007584 * (PAR)^ 2) - (0.2099 * (PAR)) + (226) ) + ( - (0.0399 * (Temperature-Celcius)^ 5) + (3.363 * (Temperature-Celcius)^ 4) - (111.5 * (Temperature-Celcius)^ 3) + (1820 * (Temperature-Celcius)^ 2) - (14630 * (Temperature-Celcius)) + (46670) ) + ( (0.002688 * (Nitrogen)^ 3) - (0.4502 * (Nitrogen)^ 2) + (24.37 * (Nitrogen) - (189.3) ) + ( - (28.49 * (Salinity-g/L)^ 2) + (133.2 * (Salinity-g/L)) + (130.7) ) ) / 400000000) - 550)
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_KA32
-  report  abs ( ( (  - (0.00000000000002301125 * (PAR)^ 7) + (0.00000000006532325 * (PAR)^ 6) - (0.0000000764855 * (PAR)^ 5) + (0.00004757025 * (PAR)^ 4) - (0.01682025 * (PAR)^ 3) + (3.344575 *(PAR)^ 2) - (339.1725 * (PAR)) + (13304.5) ) + ( (0.240875 * (Temperature-Celcius)^ 4) - (16.2975 * (Temperature-Celcius)^ 3) + (402.3125 * (Temperature-Celcius)^ 2) - (4273.225 * (Temperature-Celcius)) + (16676.75) ) + ( - (0.0002485625 * (Nitrogen)^ 4) + (0.0340505 * (Nitrogen)^ 3) - (1.476 * (Nitrogen)^ 2) + (19.95675 * (Nitrogen)) + (277.16) ) + ( - (0.1077275 * (Salinity-g/L)^ 6) + (19.9875 * (Salinity-g/L)^ 5) - (1541.6 * (Salinity-g/L)^ 4) + (63283.5 * (Salinity-g/L)^ 3) - (1457550 * (Salinity-g/L)^ 2) + (17855500 * (Salinity-g/L)) - (90958500) ) ) / 16)
+  report  abs ( ( (  - (0.00000000000002301125 * (PAR)^ 7) + (0.00000000006532325 * (PAR)^ 6) - (0.0000000764855 * (PAR)^ 5) + (0.00004757025 * (PAR)^ 4) - (0.01682025 * (PAR)^ 3) + (3.344575 *(PAR)^ 2) - (339.1725 * (PAR)) + (13304.5) ) + ( (0.240875 * (Temperature-Celcius)^ 4) - (16.2975 * (Temperature-Celcius)^ 3) + (402.3125 * (Temperature-Celcius)^ 2) - (4273.225 * (Temperature-Celcius)) + (16676.75) ) + ( - (0.0002485625 * (Nitrogen)^ 4) + (0.0340505 * (Nitrogen)^ 3) - (1.476 * (Nitrogen)^ 2) + (19.95675 * (Nitrogen)) + (277.16) ) + ( - (0.1077275 * (Salinity-g/L)^ 6) + (19.9875 * (Salinity-g/L)^ 5) - (1541.6 * (Salinity-g/L)^ 4) + (63283.5 * (Salinity-g/L)^ 3) - (1457550 * (Salinity-g/L)^ 2) + (17855500 * (Salinity-g/L)) - (90958500) ) ) / 450000000)
 end
 
 ;; Report value of variable
 to-report Biomass-Growth_LRB
-  report abs ( ( ( ( - (0.000000000006822 * (PAR)^ 5) + (0.00000001324 * (PAR)^ 4) - (0.00000959 * (PAR)^ 3) + (0.003192 * (PAR)^ 2) - (0.4828 * (PAR)) + (32.69) ) + ( - (0.005419 * (Temperature-Celcius)^ 2) + (0.01781 * (Temperature-Celcius)) + (7.138) ) + ( - (0.001261 * (Nitrogen)^ 2)) + (0.129 * (Nitrogen)) + (2.949) ) + ( - (4.567 * (Salinity-g/L)^ 4) + (30.53 * (Salinity-g/L)^ 3) - (71.14 * (Salinity-g/L)^ 2) + (66.48 * (Salinity-g/L)) - (15.05) ) ) / 16)
+  report abs ( ( ( ( - (0.000000000006822 * (PAR)^ 5) + (0.00000001324 * (PAR)^ 4) - (0.00000959 * (PAR)^ 3) + (0.003192 * (PAR)^ 2) - (0.4828 * (PAR)) + (32.69) ) + ( - (0.005419 * (Temperature-Celcius)^ 2) + (0.01781 * (Temperature-Celcius)) + (7.138) ) + ( - (0.001261 * (Nitrogen)^ 2)) + (0.129 * (Nitrogen)) + (2.949) ) + ( - (4.567 * (Salinity-g/L)^ 4) + (30.53 * (Salinity-g/L)^ 3) - (71.14 * (Salinity-g/L)^ 2) + (66.48 * (Salinity-g/L)) - (15.05) ) ) / 35000)
 end
 
 ;; Report value of variable
@@ -283,7 +284,7 @@ Photosynthetically-Active-Radiation
 Photosynthetically-Active-Radiation
 0
 3000
-405.0
+800.0
 1
 1
 umol/(m*m*s)
@@ -331,7 +332,7 @@ CHOOSER
 Strain
 Strain
 "KA32 - Nannochloropsis Oceanica" "LRB-AZ-1201 - Chlorella Vulgaris"
-0
+1
 
 SLIDER
 126
@@ -342,7 +343,7 @@ Initial-Nitrogen
 Initial-Nitrogen
 1000
 4000
-4000.0
+2000.0
 1
 1
 mg/L
@@ -372,7 +373,7 @@ Salinity
 Salinity
 0
 50
-26.0
+25.0
 1
 1
 g/L
@@ -472,39 +473,75 @@ PENS
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+This model explores the growth of algae and the production of lipids for the eventual creation of green crude and/or biofuels based on certain environmental factors.
+
+**Note that the inital spike in Lipid% should be ignored, that is caused by limitations of the software used and of my coding knowledge. Pretend that the line instead connects like a square root function towards the end of the curve which is more realistic to this type of algae cultivation.** 
 
 ## HOW IT WORKS
+ 
+ 
+ The model models the accumulation of biomass in a raceway pond with a size 3.5 m by 1.5 m and 35 cm in depth (1025 L nominal volume at 25 cm working depth, with a surface area of 4.2 m<sup>2</sup> including the paddlewheel area), with a variety of factors that can be influenced by the user, with the algae strain being  KA32 - _Nannochloropsis_ _Oceanica_ – Cellana, or LRB-AZ-1201 - _Chlorella_ _Vulgaris_ - Arizona State University.
 
-(what rules the agents use to create the overall behavior of the model)
+
+
 
 ## HOW TO USE IT
 
-(how to use the model, including a description of each of the items in the Interface tab)
+ Two main buttons are used to control the model:
+
+**_SETUP_**: Run this once you have set all the settings as described below, it resets all backend code and clears outputs. **_BEFORE_ _YOU_ _RUN_ _THIS,_ _MAKE SURE_ _TO_ _SAVE_ _ANY_ _GRAPHS_ _YOU_ _WANT_.**
+
+**_START_**: Use this to run the model simulation. **_MAKE_ _SURE_ _TO_ _RUN_ _SETUP_ _FIRST_**, or the model will not run at all, as non-first attempts may function improperly on first run.
+
+There are five inputs you can choose to manipulate:
+
+  - **The most important of these** is **_Strain_**.
+
+    - If set to  KA32 - Nannochloropsis Oceanica, the model will use corelation data for KA32, the main data points in the raceway dataset used.
+
+    - If set to LRB-AZ-1201 - Chlorella Vulgaris, the model will use correlation data for LRB-AZ-1201, the secondary set of data points in the raceway dataset used.
+
+  - **_Salinity_**, used to set the salinity of the pond for the entire run, in g/L.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+
+  - **_Initial-Nitrogen_**, how much nitrogen is added to the pond at the beginning of the cultivation, in mg/L.
+   	- Nitrogen is consumed at a rate proportional to the level of biomass, starting at the amount chosen by **_Initial-Nitrogen_**.
+
+  - **_Temperature_**, the temperature of the water in the pond, in degrees Celcius.
+	- This is assumed to stay close to constant during the cultivation run, and as such, changing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+	
+  - **_Photosynthetically-Active-Radiation_**, the light level of the pond during cultivation, in umol*m<sup>-2</sup>s<sup>-1</sup>
+	- This is assumed to stay close to constant during the cultivation run, and as such, changing this variable during the run will have no effect, as it it is set to a hidden constant at the beginning of each run, and will not change unless the **_Setup_** command is run, reseting the model.
+	- It is actually an 24 hour average, which is why we are assuming it will stay close to constant.
+
 
 ## THINGS TO NOTICE
 
-(suggested things for the user to notice while running the model)
+- Think about if the output make sense, for example, when nitrogen is lower, lipids should be higher. If you do not see that, why?
+- Think about what should have an effect. Do some research, does what you find online match with what you see, why or why not?
+- What causes the pond to crash/stop working?
 
 ## THINGS TO TRY
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+- Try moving sliders to extremes, however do note that this can cause the model to break down or not work as expected
+- Try setting all values close to each other
+- Try to cause a quick pond crash
 
 ## EXTENDING THE MODEL
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+- Figure out how to plot other variables, and plot ones that you think might be important
 
 ## NETLOGO FEATURES
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+- The model uses large and stacked IF queries
+- The model relies heavily on stocks and Systems Dynamics, rewritten by hand to allow it to work in NetLogo Web
 
-## RELATED MODELS
-
-(models in the NetLogo Models Library and elsewhere which are of related interest)
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+[Raceway Pond Model](https://www.kaggle.com/stargarden/the-algae-testbed-publicprivate-partnership-atp3) From [Kaggle](https://www.kaggle.com/)/[OpenEI](https://openei.org/wiki/ATP3_Data)/[NREL](https://data.nrel.gov/)
+
+[Kaggle Data Set was originally on NREL](https://data.nrel.gov/submissions/76) 
 @#$#@#$#@
 default
 true
