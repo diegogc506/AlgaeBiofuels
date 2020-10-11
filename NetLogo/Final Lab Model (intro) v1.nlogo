@@ -34,10 +34,12 @@ to Start
       Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
         set phase "starvation"
         set starvation-end Ticks + Starvation-Length
+        set Nitrogen = 0
       ]
       Starvation-Trigger = "Time" and Ticks = Starvation-Trigger-Amount [
         set phase "starvation"
         set starvation-end Ticks + Starvation-Length
+        set Nitrogen = 0
       ])
   ]
     phase = "starvation" [
