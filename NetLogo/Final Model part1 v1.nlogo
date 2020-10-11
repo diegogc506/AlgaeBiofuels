@@ -32,14 +32,14 @@ to Start
     set Biomass-Growth Biomass-Growth_KA32
     set Lipid-Max Lipid-Max_KA32
     set Biomass-Max Biomass-Max_KA32
-    set Nitrogen_Consumption Biomass / 1000
+    set Nitrogen_Consumption Biomass / 800
   ]
   if Strain = "LRB-AZ-1201 - Chlorella Vulgaris" [
     set Lipid-Growth Lipid-Growth_LRB
     set Biomass-Growth Biomass-Growth_LRB
     set Lipid-Max Lipid-Max_LRB
     set Biomass-Max Biomass-Max_LRB
-    set Nitrogen_Consumption Biomass / 1000
+    set Nitrogen_Consumption Biomass / 800
   ]
   set Lipid% ((Lipid * 100)/( Biomass ))
   system-dynamics-go
@@ -156,12 +156,12 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth_KA32
-  report ((((1000)*(1 - exp (-((1.7)*(PAR)/(1000)))) * (exp (-((1.7)*(PAR)/(1000))))/(250)) + ( -(0.002501 * (Temperature-Celcius)^ 4) + (0.1466 * (Temperature-Celcius)^ 3) - (3.088 * (Temperature-Celcius)^ 2) + ( 27.32 * (Temperature-Celcius)) - (70.28) ) + ( - (0.0000002417 * (Nitrogen)^ 5) + (0.00004616 * (Nitrogen)^ 4) - (0.003228 * (Nitrogen)^ 3) + (0.1001 * (Nitrogen)^ 2) - (1.373 * (Nitrogen)) + (21.01) ) + (- (0.002071 * (Salinity-g/L)^ 5) + (0.3216 * (Salinity-g/L)^ 4) - (19.91 * (Salinity-g/L)^ 3) + (614.5 * (Salinity-g/L)^ 2) - (9448 * (Salinity-g/L)) + (57920) ) ) / 4)
+  report (.0000000015 * abs ((((1000)*(1 - exp (-((1.7)*(PAR)/(1000)))) * (exp (-((1.7)*(PAR)/(1000))))/(250)) + ( -(0.002501 * (Temperature-Celcius)^ 4) + (0.1466 * (Temperature-Celcius)^ 3) - (3.088 * (Temperature-Celcius)^ 2) + ( 27.32 * (Temperature-Celcius)) - (70.28) ) + ( - (0.0000002417 * (Nitrogen)^ 5) + (0.00004616 * (Nitrogen)^ 4) - (0.003228 * (Nitrogen)^ 3) + (0.1001 * (Nitrogen)^ 2) - (1.373 * (Nitrogen)) + (21.01) ) + (- (0.002071 * (Salinity-g/L)^ 5) + (0.3216 * (Salinity-g/L)^ 4) - (19.91 * (Salinity-g/L)^ 3) + (614.5 * (Salinity-g/L)^ 2) - (9448 * (Salinity-g/L)) + (57920) ) ) / 4))
 end
 
 ;; Report value of variable
 to-report Lipid-Growth_LRB
-  report ( ( ( - (0.0000004484 * (PAR)^ 3) + (0.0007584 * (PAR)^ 2) - (0.2099 * (PAR)) + (226) ) + ( - (0.0399 * (Temperature-Celcius)^ 5) + (3.363 * (Temperature-Celcius)^ 4) - (111.5 * (Temperature-Celcius)^ 3) + (1820 * (Temperature-Celcius)^ 2) - (14630 * (Temperature-Celcius)) + (46670) ) + ( (0.002688 * (Nitrogen)^ 3) - (0.4502 * (Nitrogen)^ 2) + (24.37 * (Nitrogen) - (189.3) ) + ( - (28.49 * (Salinity-g/L)^ 2) + (133.2 * (Salinity-g/L)) + (130.7) ) ) / 400000000) - 550)
+  report .25 * ( ( ( - (0.0000004484 * (PAR)^ 3) + (0.0007584 * (PAR)^ 2) - (0.2099 * (PAR)) + (226) ) + ( - (0.0399 * (Temperature-Celcius)^ 5) + (3.363 * (Temperature-Celcius)^ 4) - (111.5 * (Temperature-Celcius)^ 3) + (1820 * (Temperature-Celcius)^ 2) - (14630 * (Temperature-Celcius)) + (46670) ) + ( (0.002688 * (Nitrogen)^ 3) - (0.4502 * (Nitrogen)^ 2) + (24.37 * (Nitrogen) - (189.3) ) + ( - (28.49 * (Salinity-g/L)^ 2) + (133.2 * (Salinity-g/L)) + (130.7) ) ) / 400000000) - 550)
 end
 
 ;; Report value of variable
@@ -332,7 +332,7 @@ CHOOSER
 Strain
 Strain
 "KA32 - Nannochloropsis Oceanica" "LRB-AZ-1201 - Chlorella Vulgaris"
-1
+0
 
 SLIDER
 126
