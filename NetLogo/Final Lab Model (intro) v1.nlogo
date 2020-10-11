@@ -34,12 +34,12 @@ to Start
       Starvation-Trigger = "Biomass" and Biomass = Starvation-Trigger-Amount [
         set phase "starvation"
         set starvation-end Ticks + Starvation-Length
-        set Nitrogen = 0
+        set Nitrogen  0
       ]
       Starvation-Trigger = "Time" and Ticks = Starvation-Trigger-Amount [
         set phase "starvation"
         set starvation-end Ticks + Starvation-Length
-        set Nitrogen = 0
+        set Nitrogen  0
       ])
   ]
     phase = "starvation" [
@@ -55,7 +55,7 @@ to Start
       set Biomass-Growth Biomass-Growth-Supplementation
       if Nitrogen = 0 [Stop]
   ])
-  set Nitrogen_Consumption Biomass / 1000
+  set Nitrogen_Consumption Biomass / 10000
   set Lipid% ((Lipid * 100)/( Biomass ))
   system-dynamics-go
   set-current-plot "Lipid Level"
@@ -133,32 +133,32 @@ end
 
 ;; Report value of variable
 to-report Lipid-Growth-Replete
-  report 1
+  report 24 / 5
 end
 
 ;; Report value of variable
 to-report Lipid-Growth-Starve
-  report 2.5
+  report 280 / 5
 end
 
 ;; Report value of variable
 to-report Lipid-Growth-Supplementation
-  report -0.5
+  report -100 / 5
 end
 
 ;; Report value of variable
 to-report Biomass-Growth-Replete
-  report 10
+  report 100000 / 1000
 end
 
 ;; Report value of variable
 to-report Biomass-Growth-Starve
-  report 1
+  report 30000 / 1000
 end
 
 ;; Report value of variable
 to-report Biomass-Growth-Supplementation
-  report 10
+  report 23000 / 1000
 end
 
 ;; Plot the current state of the system dynamics model's stocks
