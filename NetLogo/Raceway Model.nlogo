@@ -1,5 +1,5 @@
 ;    Simulate algae growth in a raceway pond based off of certain environmental and nutritional factors.
-;    Copyright (C) 2020  Gavin Kendal-Freedman
+;    Copyright (C) 2020  Gavin Kendal-Freedman, Everett Lee, Diego Garcia-Camargo, Amay Bansal
 ;
 ;    This program is free software: you can redistribute it and/or modify
 ;    it under the terms of the GNU General Public License as published by
