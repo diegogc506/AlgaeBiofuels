@@ -3,6 +3,8 @@ Creating a model on how different environmental and nutritional factors affect l
 
 Check out the [Wiki](https://github.com/aabansal/AlgaeBiofuels/wiki) for more info, and a walkthrough of the model and code used to analyze data
 
+If you came direct to the Github, please consider checking out where the project is [from](https://www.gaininginsight.org/cmwg/2020/environment/algae-biofuel).
+
    Copyright (C) 2020  Gavin Kendal-Freedman, Everett Lee, Diego Garcia-Camargo, Amay Bansal
 
    This is an open source repository: you can redistribute it and/or modify
