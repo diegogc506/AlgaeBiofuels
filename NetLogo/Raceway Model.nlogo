@@ -70,7 +70,7 @@ to Start
   system-dynamics-do-plot
   set-current-plot "Nitrogen Levels"
   system-dynamics-do-plot
-  print (Biomass-in - Biomass-eq)
+  ;;print (Biomass-in - Biomass-eq)
 end
 
 ;; Initializes the system dynamics model.
@@ -557,7 +557,6 @@ There are five inputs you can choose to manipulate:
 ## CREDITS AND REFERENCES
 
 [Raceway Pond Model](https://data.nrel.gov/submissions/76)  From [OpenEI](https://openei.org/wiki/ATP3_Data)/[NREL](https://data.nrel.gov/)
-
 
 @#$#@#$#@
 default
