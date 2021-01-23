@@ -492,7 +492,7 @@ TEXTBOX
 82
 424
 157
-Set the model speed to Max if on netlogo web.
+Set the model speed to Max IF on netlogo web.
 20
 0.0
 1
