@@ -487,6 +487,16 @@ true
 PENS
 "Nitrogen" 1.0 0 -10141563 true "" ""
 
+TEXTBOX
+145
+81
+460
+156
+Set the model speed to Max IF on netlogo web.
+20
+0.0
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
