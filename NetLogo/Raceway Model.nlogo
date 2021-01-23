@@ -487,6 +487,16 @@ true
 PENS
 "Nitrogen" 1.0 0 -10141563 true "" ""
 
+TEXTBOX
+141
+82
+424
+157
+Set the model speed to Max is on netlogo web.
+20
+0.0
+1
+
 @#$#@#$#@
 ## WHAT IS IT?
 
@@ -557,7 +567,6 @@ There are five inputs you can choose to manipulate:
 ## CREDITS AND REFERENCES
 
 [Raceway Pond Model](https://data.nrel.gov/submissions/76)  From [OpenEI](https://openei.org/wiki/ATP3_Data)/[NREL](https://data.nrel.gov/)
-
 @#$#@#$#@
 default
 true
