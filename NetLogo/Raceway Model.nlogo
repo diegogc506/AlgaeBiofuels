@@ -492,15 +492,7 @@ TEXTBOX
 82
 424
 157
-<<<<<<< Updated upstream
-Set the model speed to Max ***if*** on netlogo web.
-=======
-<<<<<<< HEAD
-Set the model speed to Max if on netlogo web.
-=======
-Set the model speed to Max ***if*** on netlogo web.
->>>>>>> a53b07d1ce590e1e2bc9b54804b609a35b9bafcc
->>>>>>> Stashed changes
+Set the model speed to Max IF on netlogo web.
 20
 0.0
 1
