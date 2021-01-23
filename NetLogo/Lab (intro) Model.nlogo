@@ -1,4 +1,4 @@
-;    Simulate algae growth in alab setting through three phases of algae cultivation.
+;    Simulate algae growth in a lab setting through three phases of algae cultivation.
 ;    Copyright (C) 2020 Gavin Kendal-Freedman, Everett Lee, Diego Garcia-Camargo, Amay Bansal
 ;
 ;    This program is free software: you can redistribute it and/or modify
